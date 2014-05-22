@@ -1,0 +1,137 @@
+% Created 2014-05-22 Thu 13:25
+\documentclass[presentation,smaller]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{color}
+\usepackage{listings}
+\input{preamble.tex}
+\usepackage{attachfile2}
+\author{Robert Vesco}
+\date{\today}
+\title{Pre-class Installation Requirements for \\ Intro to Python and Webscraping}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.3.1 (Org mode 8.2.5h)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Introduction}
+\label{sec-1}
+
+
+\section{How to Share Ipython Notebooks}
+\label{sec-2}
+
+
+\section{How to share your vagrant box}
+\label{sec-3}
+
+
+\section{How to use virtualenv \& pip}
+\label{sec-4}
+
+Virtualenv allow you to create environments. 
+
+\lstset{numbers=left,language=sh}
+\begin{lstlisting}
+## run this on the command line
+
+## assuming you are in your projects folder, create a new folder
+
+mkdir projects1 
+
+cd projects1
+
+## now create your virtualenv environment
+## this will create a folder called "env". 
+## this will house a local version of python. 
+
+virtualenv env 
+
+## IMPORTANT. 
+## Now you need to activate your environment. 
+
+source env/bin/activate
+
+## now you will be using a local version of python instead of your
+## system's python
+
+## to deactivate, simply type
+
+deactivate
+\end{lstlisting}
+
+\section{How to use virtualenv * pip}
+\label{sec-5}
+
+Now once virtualenv is installed, you can start installing modules
+locally. 
+
+The program to do this is called pip. New versions of python may come
+with it already installed, but older version may require manual 
+installation. 
+
+\lstset{numbers=left,language=sh}
+\begin{lstlisting}
+## again, these should be run on the command line. 
+
+## first, let's activate your virtual environment, if you haven't 
+## already
+
+source env/bin/activate
+
+## first, let's inspect what command are available in pip
+
+pip help
+
+## from this, we see that there are a number of commands we will 
+## find useful
+
+pip list # this shows what programs are already installed
+
+pip search numpy # this searches for packages named "numpy"
+
+pip install numpy # this installs the numpy package. 
+
+## if you have many packages you want to install, you can 
+## create a requirements list
+
+## this will create a file with a list of modules to install
+## you can use your editor of choice to install this. 
+
+echo "numpy\nbeautifulsoup" > requirements.txt
+
+## this will install all the packages in the text file. 
+## NOTE: you can specify the versions of module too. Sometimes
+## this is important. 
+
+pip install -r requirements.txt
+
+## now let's confirm that they installed correctly
+
+pip list 
+
+## now if you are done with virtualenv remember to deactivate it
+
+deactivate
+\end{lstlisting}
+% Emacs 24.3.1 (Org mode 8.2.5h)
+\end{document}
