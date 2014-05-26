@@ -1,31 +1,186 @@
-#+TITLE: Pre-class Installation Requirements for \\ Intro to Python and Webscraping
+#+TITLE: Intro to Python and Webscraping
 #+Author: Robert Vesco
 #+LaTeX_CLASS: beamer
-#+LaTeX_CLASS_OPTIONS: [presentation,smaller]
-#+BEAMER_THEME: default
+#+BEAMER_THEME: Frankfurt
+#+BEAMER_COLOR_THEME: beaver
+#+BEAMER_FONT_THEME: professionalfonts
+#+OPTIONS: H:2
+#+OPTIONS: toc:nil
 #+Latex_header: \input{preamble.tex}
 #+Latex_header: \usepackage{attachfile2}
+#+Latex_header: \setbeamertemplate{itemize/enumerate subbody begin}{\vspace{0.1cm}}
+#+Latex_header: \setbeamertemplate{itemize/enumerate subbody end}{\vspace{0.1cm}}
 
-* Introduction
+* Intro
 
-* How to Share Ipython Notebooks
+** Class Objectives
+
+- Introduce basic python and webscraping
+- Provide skills & knowledge not in online tutorials
+- Tools that can be used with any programming language
+
+** Plan
+- 9 - 9:15: Setup issues
+- 9:15 - 9:30 Python in Scientific Computing
+- 9:30 - 9:45 Anaconda & Spyder
+- 9:45 - 10:30 Command line basics
+- 10:30 - 12:00 Python Basics
+- 12:00 - 12:30 Lunch
+- 12:30 - 3:00 Python Webscraping
+- 3:00 - 4:30 Practice with your own site
+- 4:30 - 5:00 Other Tools, Development Environment
+
+* Python Context
+
+** Abbreviated/Opinionated History of Programming Languages
+
+- C, C++ 
+- Awk, Sed & shell scripts
+- Practical Extraction and Reporting (perl)
+- S (R precursor)
+- Java 
+- Ruby (perl 2.0)
+- R 
+- Python
+- Julia (R 2.0)
+
+** Python and Stats
+
+** Python and Jobs
+
+** Python Considerations
+*** Support For 					      :BMCOL:
+   :PROPERTIES:
+   :BEAMER_env: block
+   :BEAMER_col: 0.5
+   :BEAMER_envargs: C[t]
+   :END:
+- Readability & Consistency (pythonic)
+- Fairly fast
+- Not Java
+- Used in biz ops & domains
+
+*** Support Against 					      :B_block:BMCOL:
+   :PROPERTIES:
+   :BEAMER_env: block
+   :BEAMER_col: 0.5
+   :END:
+- Backward compatibility
+- Fragile package dependencies
+- Fragmentation
+- Complementary Assets for Science
+
+** The many faces and versions of Python
+
+- Cython (main)
+- IronPython (.net)
+- PyPy (JIT)
+- Jython (compiles to java)
+- Ipython (scientific and interactive)
+
+* Terminals
+
+** Anaconda and Spydyer
+
+- Anaconda is a pre-packaged python distribution for scientists
+- Spyder is an IDE (Integrated Development Environment)
+- Open a terminal or click spyder 
+
+#+BEGIN_SRC sh
+anaconda/bin/spyder
+#+END_SRC
+
+- Open terminal within spyder
 
 
-* How to share your vagrant box
+** Why Terminals and Command Line Programs?
 
+- Troubleshooting python programs
+- Managing programs and files
+- Right tool for some jobs
 
-* How to use virtualenv & pip 
+** Shells vs Terminals
+
+- Shells are programs (like python) that help you interact computer.
+  - csh (c shell, mostly seen on older servers)
+  - bash (most common)
+  - zsh (most convenient)
+- Terminals are wrappers around shells (iterm2 for macs)
+- .bashrc, .cshrc, .zshrc are configuration files for shells
+
+** 
+
+* Python Basics
+* Webscraping
+* Development
+* BEAMER Slide Examples 
 :PROPERTIES:
-:BEAMER_env: allowframebreaks
+:BEAMER_env: ignoreheading
 :END:
 
-Virtualenv allow you to create environments. 
+** Top Aligned Blocks
+
+*** Code						      :B_block:BMCOL:
+   :PROPERTIES:
+   :BEAMER_env: block
+   :BEAMER_col: 0.5
+   :BEAMER_envargs: C[t]
+   :END:
+Cool
+Lots
+of Stuf
+
+To talk
+
+about
+
+*** Result						      :B_block:BMCOL:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_col: 0.5
+    :END:
+pretty nice!
+
+
+** Inline math
+
+
+** Beamer: Animated Bullets
+
+#+ATTR_BEAMER: :overlay +-
+     - Trouble Shooting
+     - A framework for thinking about programming
+
+
+** Beamer Columns
+
+*** Stuff							      :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5 
+:END:
+**** Stuff
+- Truth is ephemeral
+
+
+*** Stuff 2						      :BMCOL:B_block:
+:PROPERTIES:
+:BEAMER_col: 0.5 
+:END:
+- What is right?
+- What is Wrong?
+
+  
+* Junk/Archive
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
+
+
+** How to use virtualenv & pip 
 
 #+BEGIN_SRC sh
   ## run this on the command line
-  
   ## assuming you are in your projects folder, create a new folder
-  
   mkdir projects1 
   
   cd projects1
@@ -33,82 +188,87 @@ Virtualenv allow you to create environments.
   ## now create your virtualenv environment
   ## this will create a folder called "env". 
   ## this will house a local version of python. 
-  
   virtualenv env 
   
   ## IMPORTANT. 
   ## Now you need to activate your environment. 
-  
   source env/bin/activate
   
   ## now you will be using a local version of python instead of your
   ## system's python
   
   ## to deactivate, simply type
-  
   deactivate
 #+END_SRC
 
+** How to Share Ipython Notebooks
 
-* How to use virtualenv * pip
+** How to share your vagrant box
+** Testing Python Output
 
-Now once virtualenv is installed, you can start installing modules
-locally. 
+#+BEGIN_SRC python :exports both
+a = ('b', 200)
+b = ('x', 10)
+c = ('q', -42)
+return (a, b, c)
+#+END_SRC
 
-The program to do this is called pip. New versions of python may come
-with it already installed, but older version may require manual 
-installation. 
+#+RESULTS:
+| b | 200 |
+| x |  10 |
+| q | -42 |
+** Python Output
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC python
+a = ('b', 200)
+b = ('x', 10)
+c = ('q', -42)
+return (a, b, c)
+#+END_SRC
+
+#+RESULTS:
+| b | 200 |
+| x |  10 |
+| q | -42 |
+
+By removing the :exports both, you can export just the code and not the output. By replaceing it with :exports results, you can export the output without the source. 
+** Using pip once virtualenv is activated
+
+:PROPERTIES:
+:EXPORT_LaTeX_HEADER:  {\lstset{commentstyle=\color{red}}} 
+:END:
+
+#+BEGIN_SRC sh 
   ## again, these should be run on the command line. 
-  
   ## first, let's activate your virtual environment, if you haven't 
   ## already
-  
   source env/bin/activate
   
   ## first, let's inspect what command are available in pip
-  
   pip help
   
   ## from this, we see that there are a number of commands we will 
   ## find useful
-  
   pip list # this shows what programs are already installed
-  
   pip search numpy # this searches for packages named "numpy"
-  
   pip install numpy # this installs the numpy package. 
   
   ## if you have many packages you want to install, you can 
   ## create a requirements list
-  
   ## this will create a file with a list of modules to install
   ## you can use your editor of choice to install this. 
-  
   echo "numpy\nbeautifulsoup" > requirements.txt
   
   ## this will install all the packages in the text file. 
   ## NOTE: you can specify the versions of module too. Sometimes
   ## this is important. 
-  
   pip install -r requirements.txt
   
   ## now let's confirm that they installed correctly
-  
   pip list 
   
   ## now if you are done with virtualenv remember to deactivate it
-  
   deactivate
-  
 #+END_SRC
-
-
-#+BEGIN_SRC python
-
-
-#+END_SRC
-
 
 

@@ -1,5 +1,11 @@
 (TeX-add-style-hook "intro_to_python_webscraping.beamer"
  (lambda ()
+    (LaTeX-add-labels
+     "sec-1"
+     "sec-2"
+     "sec-3"
+     "sec-4"
+     "sec-5")
     (TeX-run-style-hooks
      "attachfile2"
      "listings"
@@ -26,7 +32,6 @@
      "latex2e"
      "beamer10"
      "beamer"
-     "smaller"
      "presentation"
      "preamble")))
 

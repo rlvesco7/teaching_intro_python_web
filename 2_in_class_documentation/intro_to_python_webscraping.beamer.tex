@@ -1,5 +1,5 @@
-% Created 2014-05-22 Thu 13:25
-\documentclass[presentation,smaller]{beamer}
+% Created 2014-05-26 Mon 06:35
+\documentclass[presentation]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{fixltx2e}
@@ -20,10 +20,14 @@
 \usepackage{listings}
 \input{preamble.tex}
 \usepackage{attachfile2}
-\usetheme{default}
+\setbeamertemplate{itemize/enumerate subbody begin}{\vspace{0.1cm}}
+\setbeamertemplate{itemize/enumerate subbody end}{\vspace{0.1cm}}
+\usetheme{Frankfurt}
+\usecolortheme{beaver}
+\usefonttheme{professionalfonts}
 \author{Robert Vesco}
 \date{\today}
-\title{Pre-class Installation Requirements for \\ Intro to Python and Webscraping}
+\title{Intro to Python and Webscraping}
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
@@ -31,33 +35,189 @@
 \begin{document}
 
 \maketitle
-\begin{frame}{Outline}
-\tableofcontents
+
+\section{Intro}
+\label{sec-1}
+
+\begin{frame}[label=sec-1-1]{Class Objectives}
+\begin{itemize}
+\item Introduce basic python and webscraping
+\item Provide skills \& knowledge not in online tutorials
+\item Tools that can be used with any programming language
+\end{itemize}
+\end{frame}
+\begin{frame}[label=sec-1-2]{Plan}
+\begin{itemize}
+\item 9 - 9:15: Setup issues
+\item 9:15 - 9:30 Python in Scientific Computing
+\item 9:30 - 9:45 Anaconda \& Spyder
+\item 9:45 - 10:30 Command line basics
+\item 10:30 - 12:00 Python Basics
+\item 12:00 - 12:30 Lunch
+\item 12:30 - 3:00 Python Webscraping
+\item 3:00 - 4:30 Practice with your own site
+\item 4:30 - 5:00 Other Tools, Development Environment
+\end{itemize}
+\end{frame}
+\section{Python Context}
+\label{sec-2}
+
+\begin{frame}[label=sec-2-1]{Abbreviated/Opinionated History of Programming Languages}
+\begin{itemize}
+\item C, C++
+\item Awk, Sed \& shell scripts
+\item Practical Extraction and Reporting (perl)
+\item S (R precursor)
+\item Java
+\item Ruby (perl 2.0)
+\item R
+\item Python
+\item Julia (R 2.0)
+\end{itemize}
+\end{frame}
+\begin{frame}[label=sec-2-2]{Python and Stats}
 \end{frame}
 
-
-\begin{frame}[label=sec-1]{Introduction}
+\begin{frame}[label=sec-2-3]{Python and Jobs}
 \end{frame}
 
-
-\begin{frame}[label=sec-2]{How to Share Ipython Notebooks}
+\begin{frame}[label=sec-2-4]{Python Considerations}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{block}{Support For}
+\begin{itemize}
+\item Readability \& Consistency (pythonic)
+\item Fairly fast
+\item Not Java
+\item Used in biz ops \& domains
+\end{itemize}
+\end{block}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{block}{Support Against}
+\begin{itemize}
+\item Backward compatibility
+\item Fragile package dependencies
+\item Fragmentation
+\item Complementary Assets for Science
+\end{itemize}
+\end{block}
+\end{column}
+\end{columns}
 \end{frame}
-
-
-\begin{frame}[label=sec-3]{How to share your vagrant box}
+\begin{frame}[label=sec-2-5]{The many faces and versions of Python}
+\begin{itemize}
+\item Cython (main)
+\item IronPython (.net)
+\item PyPy (JIT)
+\item Jython (compiles to java)
+\item Ipython (scientific and interactive)
+\end{itemize}
 \end{frame}
+\section{Terminals}
+\label{sec-3}
 
-
-\begin{frame}[fragile,label=sec-4]{How to use virtualenv \& pip}
-
- Virtualenv allow you to create environments. 
+\begin{frame}[fragile,label=sec-3-1]{Anaconda and Spydyer}
+ \begin{itemize}
+\item Anaconda is a pre-packaged python distribution for scientists
+\item Spyder is an IDE (Integrated Development Environment)
+\item Open a terminal or click spyder
+\end{itemize}
 
 \lstset{numbers=left,language=sh}
 \begin{lstlisting}
+anaconda/bin/spyder
+\end{lstlisting}
+
+\begin{itemize}
+\item Open terminal within spyder
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label=sec-3-2]{Why Terminals and Command Line Programs?}
+\begin{itemize}
+\item Troubleshooting python programs
+\item Managing programs and files
+\item Right tool for some jobs
+\end{itemize}
+\end{frame}
+\begin{frame}[label=sec-3-3]{Shells vs Terminals}
+\begin{itemize}
+\item Shells are programs (like python) that help you interact computer.
+\begin{itemize}
+\item csh (c shell, mostly seen on older servers)
+\item bash (most common)
+\item zsh (most convenient)
+\end{itemize}
+\item Terminals are wrappers around shells (iterm2 for macs)
+\item .bashrc, .cshrc, .zshrc are configuration files for shells
+\end{itemize}
+\end{frame}
+\begin{frame}[label=sec-3-4]{}
+\end{frame}
+\section{Python Basics}
+\label{sec-4}
+\section{Webscraping}
+\label{sec-5}
+
+\begin{frame}[label=sec-6-1]{Top Aligned Blocks}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{block}{Code}
+Cool
+Lots
+of Stuf
+
+To talk
+
+about
+\end{block}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{block}{Result}
+pretty nice!
+\end{block}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=sec-6-2]{Inline math}
+\end{frame}
+
+
+\begin{frame}[label=sec-6-3]{Beamer: Animated Bullets}
+\begin{itemize}[<+->]
+\item Trouble Shooting
+\item A framework for thinking about programming
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label=sec-6-4]{Beamer Columns}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{block}{Stuff}
+\begin{itemize}
+\item Truth is ephemeral
+\end{itemize}
+\end{block}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+\item What is right?
+\item What is Wrong?
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}[fragile,label=sec-7-1]{How to use virtualenv \& pip}
+ \lstset{numbers=left,language=sh}
+\begin{lstlisting}
 ## run this on the command line
-
 ## assuming you are in your projects folder, create a new folder
-
 mkdir projects1 
 
 cd projects1
@@ -65,73 +225,87 @@ cd projects1
 ## now create your virtualenv environment
 ## this will create a folder called "env". 
 ## this will house a local version of python. 
-
 virtualenv env 
 
 ## IMPORTANT. 
 ## Now you need to activate your environment. 
-
 source env/bin/activate
 
 ## now you will be using a local version of python instead of your
 ## system's python
 
 ## to deactivate, simply type
-
 deactivate
 \end{lstlisting}
 \end{frame}
+\begin{frame}[label=sec-7-2]{How to Share Ipython Notebooks}
+\end{frame}
 
-\begin{frame}[fragile,label=sec-5]{How to use virtualenv * pip}
- Now once virtualenv is installed, you can start installing modules
-locally. 
+\begin{frame}[label=sec-7-3]{How to share your vagrant box}
+\end{frame}
+\begin{frame}[fragile,label=sec-7-4]{Testing Python Output}
+ \lstset{numbers=left,language=Python}
+\begin{lstlisting}
+a = ('b', 200)
+b = ('x', 10)
+c = ('q', -42)
+return (a, b, c)
+\end{lstlisting}
 
-The program to do this is called pip. New versions of python may come
-with it already installed, but older version may require manual 
-installation. 
+\begin{center}
+\begin{tabular}{lr}
+b & 200\\
+x & 10\\
+q & -42\\
+\end{tabular}
+\end{center}
+\end{frame}
 
-\lstset{numbers=left,language=sh}
+\begin{frame}[fragile,label=sec-7-5]{Python Output}
+ \lstset{numbers=left,language=Python}
+\begin{lstlisting}
+a = ('b', 200)
+b = ('x', 10)
+c = ('q', -42)
+return (a, b, c)
+\end{lstlisting}
+
+By removing the :exports both, you can export just the code and not the output. By replaceing it with :exports results, you can export the output without the source. 
+\end{frame}
+
+\begin{frame}[fragile,label=sec-7-6]{Using pip once virtualenv is activated}
+
+ \lstset{numbers=left,language=sh}
 \begin{lstlisting}
 ## again, these should be run on the command line. 
-
 ## first, let's activate your virtual environment, if you haven't 
 ## already
-
 source env/bin/activate
 
 ## first, let's inspect what command are available in pip
-
 pip help
 
 ## from this, we see that there are a number of commands we will 
 ## find useful
-
 pip list # this shows what programs are already installed
-
 pip search numpy # this searches for packages named "numpy"
-
 pip install numpy # this installs the numpy package. 
 
 ## if you have many packages you want to install, you can 
 ## create a requirements list
-
 ## this will create a file with a list of modules to install
 ## you can use your editor of choice to install this. 
-
 echo "numpy\nbeautifulsoup" > requirements.txt
 
 ## this will install all the packages in the text file. 
 ## NOTE: you can specify the versions of module too. Sometimes
 ## this is important. 
-
 pip install -r requirements.txt
 
 ## now let's confirm that they installed correctly
-
 pip list 
 
 ## now if you are done with virtualenv remember to deactivate it
-
 deactivate
 \end{lstlisting}
 \end{frame}
