@@ -1,6 +1,6 @@
 #+TITLE: Introduction to Python and Webscraping
 #+Author: Robert Vesco
-#+LaTeX_HEADER: \institute[Yale]{Yale School of Management - ILO}
+#+LaTeX_HEADER: \institute[ILO]{Yale School of Management \\ Initiative on Leadership and Organization (ILO)}
 #+LaTeX_CLASS: beamer
 #+BEAMER_THEME: Montpellier
 #+BEAMER_COLOR_THEME: beaver
@@ -10,7 +10,7 @@
 #+OPTIONS: H:3
 #+OPTIONS: toc:nil
  # #+Latex_header: \setbeameroption{show only notes}
-#+Latex_header: \setbeameroption{show notes}
+ # #+Latex_header: \setbeameroption{show notes}
 #+Latex_header: \input{preamble.tex}
 #+Latex_header: \usepackage{attachfile2}
 #+Latex_header: \usepackage{hyperref}
@@ -26,6 +26,7 @@
 - Provide skills & knowledge not in online tutorials
 http://techcrunch.com/2014/05/24/dont-believe-anyone-who-tells-you-learning-to-code-is-easy/
 - Tools that can be used with any programming language
+- Real time googling, SO and problem-solving
 - Provide some guidance for your personal projects
 
 *** Plan
@@ -62,7 +63,11 @@ http://techcrunch.com/2014/05/24/dont-believe-anyone-who-tells-you-learning-to-c
 
 [[file:./images/lang_and_regression.png]]
 
-*** Python and Journals
+*** Python and Stats
+#+attr_latex: :width 3in
+[[file:./images/jobs_stats.png]]
+
+*** Stats and Journals
 
 [[file:./images/lang_in_journals.png]]
 
@@ -106,11 +111,13 @@ http://www.talyarkoni.org/blog/2013/11/18/the-homogenization-of-scientific-compu
 
 Python 3 is killing Python
 https://medium.com/@deliciousrobots/5d2ad703365d/ 
+\\
 
-Python 3 can revive Python
+Python 3 can revive Python \\
 https://medium.com/p/2a7af4788b10
 
 - Python 3 is to Python what Windows 8 is to Windows
+- Important: Python 3 broke compatibility
 
 *** Interactive Python (IPYTHON)
 
@@ -124,6 +131,7 @@ https://medium.com/p/2a7af4788b10
   - !cmd lets you run terminal commands
 - Terminal friendly
 
+
 * Terminals
 
 *** Why Terminals and Command Line Programs?
@@ -131,6 +139,7 @@ https://medium.com/p/2a7af4788b10
 - Troubleshooting python programs
 - Managing programs and files (very important for webscraping)
 - Right tool for some jobs
+
 
 *** CD - Change Directory 
 
@@ -182,6 +191,7 @@ less -SN filename.txt
 - Windows: runas /user:admin
 - Best to minimize programs running at elevated rights
 - Modifying system files usually require this. 
+
 
 *** File Permissions
 
@@ -241,6 +251,7 @@ which env
      :BEAMER_env: note
      :END:
 
+
 *** Find
 
 - Flexibly file finder -- very important for webscraping
@@ -261,6 +272,18 @@ find . -maxdepth 1 -type f -name "*.py" -print -exec chmod +x {} \;
 
 http://www.tecmint.com/35-practical-examples-of-linux-find-command/
 
+
+*** Git 
+- Git is a code versioning tool, but used to redistribute software
+- Github is a website that hosts repositories
+
+#+BEGIN_SRC sh
+# last part creates a directory with that name. Use . If already in dir of choice.
+git clone git://github.com/rlvesco7/teaching_intro_python_web python_web
+#or 
+git clone https://github.com/rlvesco7/teaching_intro_python_web python_web
+#+END_SRC
+
 *** Shells vs Terminals
 
 - Shells are programs (like python) that help you interact computer.
@@ -269,6 +292,7 @@ http://www.tecmint.com/35-practical-examples-of-linux-find-command/
   - zsh (most convenient)
 - Terminals are wrappers around shells (iterm2 for macs)
 - .bashrc, .cshrc, .zshrc are configuration files for shells
+
 
 *** Paths
 - One of the biggest causes of angst
@@ -290,12 +314,80 @@ export PATH="$PATH:/usr/local/bin/python"
 PATH=$PATH:/my/new/path #temporary
 #+END_SRC
 
-*** Git 
-- Git is a code versioning tools, but used to redistribute software
-
+*** Terminal Configuration
+http://www.tldp.org/LDP/abs/html/sample-bashrc.html
+#+BEGIN_SRC sh
+cd  # changes to your home directory
+#open -t .bashrc #mac
+#notepad .bashrc #windows
+#gedit .bashrc #likely on linux
+#+END_SRC
+- Add: 
+#+BEGIN_SRC sh
+alias la = "ls -lahG" #shortcut for listing files in directory
+#export PATH="$HOME/python_web/wget/:$PATH" #for windows
+#+END_SRC
+- now you need to update your config file
+#+BEGIN_SRC sh
+. .bashrc
+#or 
+source .bashrc
+#+END_SRC
 
 *** Wget 
 - Flexible, fast tool for downloading & spidering
+#+BEGIN_SRC sh :tangle pdfwget.txt
+wget -r -H -l1 -erobots=off -nd -A 'pa02*.zip' http://www.google.com/googlebooks/uspto-patents-applications-text.html
+
+# -r = recursive
+# -H = to span domains, ie can leave blog ???
+# -l1 = only to the depth of one
+# -erobots=off = ignore robots.txt
+# -nd = don't follow directory structure, just drop all files into folder
+# -A 'pa01*.zip" = download only links with this regex
+
+#xargs -i wget 'http://storage.googleapis.com/patents/grant_full_text/2012/{}' < list2012missing.txt
+
+unzip \* #to unzip a bunch of zip files
+#+END_SRC
+\textattachfile[color =  0.5 0.5 0.5]{pdfwget.txt}{view source}
+
+*** Sed
+
+- Stream Editor -- operates line by line
+- Cleaning text files
+http://sed.sourceforge.net/sed1line.txt 
+
+#+BEGIN_SRC sh
+sed '1d' #deletes first line of a text file
+sed "s/$//" #convert unix to dos
+sed 's/^/     /' #insert 5 blank spaces
+# substitute "foo" with "bar" ONLY for lines which contain "baz"
+sed '/baz/s/foo/bar/g'
+#+END_SRC
+
+*** Head, Tails, Less
+
+#+BEGIN_SRC sh
+head filename 
+head filename > newsmallfile
+tail filename
+less -SN filename #add line numbers and don't wrap
+#+END_SRC
+
+*** Grep & Chaining Commands & SDTOUT
+- Grep is for finding text within files and standard output
+- | "the pipe" is for chaining commands together
+- > redirects stdout to file
+- Can be combined with python scripts
+#+BEGIN_SRC sh
+grep -i "path" ~/.bashrc
+
+la | grep org
+cat pdfwget.txt | head | grep wget #grep is taking in stdout
+#+END_SRC
+- Exercise: Find how to integrate system command with your statistical system (sas, r, stata)
+
 
 * Python
 
@@ -303,13 +395,12 @@ PATH=$PATH:/my/new/path #temporary
 
 - Anaconda is a pre-packaged python distribution for scientists
 - Spyder is an IDE (Integrated Development Environment)
-- Open a terminal or click spyder 
+- Open a terminal and type: spyder& 
 
 #+BEGIN_SRC sh
-anaconda/bin/spyder
+#cd ~/anaconda/bin/
+#spyder
 #+END_SRC
-
-- Open terminal within spyder
 
 
 ** Basics
@@ -324,6 +415,25 @@ anaconda/bin/spyder
 - Function, Objects and Modules
 - Scripting and Programs
 
+*** Getting Help
+- http://stackoverflow.com/
+- https://docs.python.org/2/tutorial/
+- http://www.tutorialspoint.com/python/
+- http://www.codecademy.com/tracks/python
+- help(function) gets you the "docstring"
+#+BEGIN_SRC python :results output code :session :exports result
+help(len)
+#+END_SRC 
+
+#+RESULTS:
+#+BEGIN_SRC python
+Help on built-in function len in module __builtin__:
+
+len(...)
+    len(object) -> integer
+
+    Return the number of items of a sequence or mapping.
+#+END_SRC
 
 *** Hello World
 
@@ -395,15 +505,14 @@ Are surround by triple-quoted strings
 <type 'str'>
 #+END_SRC
 
-
 *** Data Structures
 - Often considered "types" or "compound types"
 - Base python has
   - lists = ['apples',44, 'peaches']
   - tuples = read-only lists = ('apples',44,'peaches')
+  - sets = like lists but unique values only
   - dictionaries = key:value pairs = {'firstname':'tom','lastname':'selleck'}
-
-
+    
 *** Lists: Slicing
 - lists are flexible. They can be nested, shrunk, combined ...
 - Indexed starting with 0
@@ -427,7 +536,6 @@ ls[1:4:2] #last element in step. Easy way to get odd
 ['a', 'b']
 #+END_SRC
 
-
 *** Lists: Adding and Removing Elements
 
 #+BEGIN_SRC python :results output code :session :exports result
@@ -449,7 +557,6 @@ ls.count(1)
 2
 #+END_SRC
 
-
 *** Lists: Whole List Operations
 
 #+BEGIN_SRC python :results output code :session :exports result
@@ -467,7 +574,6 @@ ls
 ['newlist added to old', 'b', 'after second to last', 'after second element', 'add to end', 2, 1, 1]
 #+END_SRC
 
-
 *** Lists: List Comprehensions
 - Functions on list elements, like loops
 - Not recommended for complex scenarios
@@ -484,7 +590,6 @@ ls2
 ['1', 'a', '2', 'b', '1']
 [['11', 'a1', '21', 'b1', '11'], ['1a', 'aa', '2a', 'ba', '1a'], ['12', 'a2', '22', 'b2', '12'], ['1b', 'ab', '2b', 'bb', '1b'], ['11', 'a1', '21', 'b1', '11']]
 #+END_SRC
-
 
 *** Sets
 - Set are like lists, but must contain unique data and can't be nested
@@ -508,7 +613,6 @@ set([1, 2, 3])
 >>> <type 'list'>
 #+END_SRC
 
-
 *** Tuples
 - Tuples are like lists, but they are immutable
 - Memory efficient because python knows how much memory to allocate
@@ -529,7 +633,6 @@ tp2[2] #slicing uses [] not ()
 (1, 2, 3)
 3
 #+END_SRC
-
 
 *** Dictionaries
 - Represented by key:value pairs. Know as hashes, maps, associative collections
@@ -552,14 +655,74 @@ dct.values()
 [2, 1]
 #+END_SRC
 
-
-*** Operators
-
-
 *** Control structures
+- Python assumes non-zero, non-null values are true
+- zero, null = false
+- if statement; if ... else ; nested ifs
+#+BEGIN_SRC python :results output code :session :exports result
+var = 100
+if ( var  == 100 ) : print "Value of expression is 100"
+print "Good bye!"
+# spacing, 4 spaces
+if expression:
+   statement(s)
+else:
+   statement(s)
+#+END_SRC 
 
+*** Control Structures
+- else if
+- no switches or cases in python
+#+BEGIN_SRC sh
+if expression1:
+   statement(s)
+elif expression2:
+   statement(s)
+elif expression3:
+   statement(s)
+else:
+   statement(s)
+#+END_SRC
+
+*** Loops
+- For
+- While
+
+#+BEGIN_SRC python :results output code :session :exports result
+for num in range(10,20):  #to iterate between 10 to 20
+   for i in range(2,num): #to iterate on the factors of the number
+      if num%i == 0:      #to determine the first factor
+         j=num/i          #to calculate the second factor
+         print '%d equals %d * %d' % (num,i,j)
+         break #to move to the next number, the #first FOR
+   else:                  # else part of the loop
+      print num, 'is a prime number'
+#+END_SRC 
+
+#+RESULTS:
+#+BEGIN_SRC python
+...
+17 is a prime number
+18 equals 2 * 9
+19 is a prime number
+#+END_SRC
+
+*** Loops 
+- While loops are very useful for webscraping because you don't know ex ante when conditions end
+- The dreaded infinite loop
+#+BEGIN_SRC python :results output code :session :exports result
+count = 0
+while (count < 9):
+   print 'The count is:', count
+   count = count + 1
+
+print "Good bye!"
+#+END_SRC 
 
 *** Strings
+:PROPERTIES:
+:BEAMER_opt: shrink=10
+:END: 
 
 **** Strings vs Numbers
 #+BEGIN_SRC python :results output code :session :exports result
@@ -576,7 +739,6 @@ False
 False
 True
 #+END_SRC
-
 
 **** Strings vs lists of strings
 
@@ -596,11 +758,11 @@ False
 #+END_SRC
 
 *** Objects, Methods and Functions
-- Methods are function that operate on objects
+- Methods are functions that operate on objects
 - Object: dog Method: eat
-- Functions
+- Classes of objects: felines => cats , lions
+- Functions vs Objects/Methods
 http://stackoverflow.com/questions/8108688/in-python-when-should-i-use-a-function-instead-of-a-method
-
 
 #+BEGIN_SRC python :results output code :session :exports result
   var1.capitalize() # method on object
@@ -612,11 +774,6 @@ http://stackoverflow.com/questions/8108688/in-python-when-should-i-use-a-functio
 'Test strings'
 12
 #+END_SRC
-
-
-*** Modules
-
-*** Dates
 
 *** Functions
 - parameter order matters, unless name=paramater
@@ -641,7 +798,13 @@ positional ordering matter is not named 4
 #+END_SRC
 
 
-*** Files I/O
+*** Modules
+- For science: numpy, scipy, statsmodels, lxml, beautifulsoup, pandas ... 
+#+BEGIN_SRC python :results output code :session :exports result
+import modulename
+import modulename as shortname
+import functionx from module name
+#+END_SRC 
 
 *** CSV files - Basic
 #+BEGIN_SRC sh
@@ -664,7 +827,7 @@ fl
 #+END_SRC
 
 *** CSV files - Custom
-
+- troublesome
 #+BEGIN_SRC python :results output code :session :exports result
 class customcsv(csv.Dialect):
     lineterminator = '\n'
@@ -674,12 +837,6 @@ class customcsv(csv.Dialect):
 fl.csv = csv.reader("test.csv", dialect=customcsv)
 fl.csv
 #+END_SRC 
-
-#+RESULTS:
-#+BEGIN_SRC python
-
-
-#+END_SRC
 
 *** CSV files - Pandas - read_csv
 
@@ -732,42 +889,6 @@ head1  head2
 #+END_SRC
 
 
-*** Getting Help
-- help(function) gets you the "docstring"
-#+BEGIN_SRC python :results output code :session :exports result
-help(len)
-#+END_SRC 
-
-#+RESULTS:
-#+BEGIN_SRC python
-Help on built-in function len in module __builtin__:
-
-len(...)
-    len(object) -> integer
-
-    Return the number of items of a sequence or mapping.
-#+END_SRC
-
-
-** Advanced
-
-*** Regular Expression
-
-*** Expressions
-
-*** Classes/Objects
-
-*** Common Packages
-**** Scientific
- - Numpy: N-dimensional arrays, C integration, linear algebra
- - SciPy: Numerical integration, optimization, depends on Numpy
- - Matplotlib: 2d plotting
- - Pandas: Approximates R/Stata, data cleaning, dataframes
- - Statsmodels: For statistical models
-**** Webscraping
-- BeautifulSoup
-
-
 * Webscraping
 
 ** Firefox/HTML
@@ -776,11 +897,8 @@ len(...)
 
 - HTML is an implementation of XML (a meta language)
 - JavaScript Object Notation (JSON) is replacing xml for speed and readability (api) 
-
-*** Firebug
-- Firebug is tool that allow you to inspect the elements of a webpage
-directly. 
-
+- Firebug is a tool that allows you to inspect elements
+- xpath plugin for firebug is useful ... but only in firefox
 
 ** XML
 
@@ -791,9 +909,6 @@ directly.
 : http://www.zvon.org/comp/r/tut-XPath_1.html#Pages~List_of_XPaths
 - Full reference
 http://www.w3.org/TR/xpath/ 
-
-
-
 
 *** XML - Loading
 :PROPERTIES:
@@ -826,7 +941,6 @@ for con in root.contact:
     print con.attrib
 #+END_SRC 
 \textattachfile[color =  0.5 0.5 0.5]{pdfxml.txt}{view source}
-
 
 ** JSON
 
@@ -924,222 +1038,29 @@ pd.DataFrame(rstadd)
 *** Regular Expressions (Regex)
 - Regex came from perl, used to find text patterns
 - To fragile for webscraping, but important complement
+http://www.rexegg.com/regex-quickstart.html
 
+* Scraping Strategies
+
+- Let's discuss what you're interested in
+- Key things
+  - How to get pages
+  - How to parse
+  - How to overcome efforts to not let you scrape
 
 * Development
 
-** Paths
+- Anaconda is good, but it may have limitations
+- Virtual Env
+- Homebrew
+- Babun
+- Iterm2
+- Virtual Machines/Servers
 
-stuff
-
-** Other
-
-Stuff
-
-
-* Other resources
+* Other Resources
 :PROPERTIES:
 :BEAMER_env: ignoreheading
 :END:
-
-*** Git
-
-http://wildlyinaccurate.com/a-hackers-guide-to-git
-
-** Python
-*** Operators
-
-*** Setting Up Your Development Environment
+http://www.codecademy.com/tracks/python 
 
 
-* BEAMER Slide Examples 
-:PROPERTIES:
-:BEAMER_env: ignoreheading
-:END:
-
-*** Top Aligned Blocks
-
-**** Code						      :B_block:BMCOL:
-   :PROPERTIES:
-   :BEAMER_env: block
-   :BEAMER_col: 0.5
-   :BEAMER_envargs: C[t]
-   :END:
-Cool
-Lots
-of Stuf
-
-To talk
-
-about
-
-**** Result						      :B_block:BMCOL:
-    :PROPERTIES:
-    :BEAMER_env: block
-    :BEAMER_col: 0.5
-    :END:
-pretty nice!
-
-
-** Inline math
-
-
-*** Beamer: Animated Bullets
-
-#+ATTR_BEAMER: :overlay +-
-     - Trouble Shooting
-     - A framework for thinking about programming
-
-
-*** Beamer Columns
-
-**** Stuff							      :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.5 
-:END:
-**** Stuff
-- Truth is ephemeral
-
-
-**** Stuff 2						      :BMCOL:B_block:
-:PROPERTIES:
-:BEAMER_col: 0.5 
-:END:
-- What is right?
-- What is Wrong?
-
-  
-* Junk/Archive
-:PROPERTIES:
-:BEAMER_env: ignoreheading
-:END:
-
-*** setting python paths
-
-#+BEGIN_example
-:Setting environment variables (like PYTHONPATH)
-:Create an emacs-lisp code block that looks like this:
-
-:#+BEGIN_SRC emacs-lisp
-:(setenv "PYTHONPATH" "/Users/neilsen/Development/obswatch-trunk/common/python")
-:#+END_SRC
-:Execute it, and it changes the environment accordingly.
-:Note that you can also append to environment variables like this:
-
-:#+BEGIN_SRC emacs-lisp
-:(setenv "PYTHONPATH" (concat (getenv "PYTHONPATH") ":" (getenv "DQSTATS_DIR")))
-:#+END_SRC
-:#+END_SRC
-#+end_example
-
-
-
-*** How to use virtualenv & pip 
-
-#+BEGIN_SRC sh
-## run this on the command line
-## assuming you are in your projects folder, create a new folder
-mkdir projects1 
-
-cd projects1
-
-## now create your virtualenv environment
-## this will create a folder called "env". 
-## this will house a local version of python. 
-virtualenv env 
-
-## IMPORTANT. 
-## Now you need to activate your environment. 
-source env/bin/activate
-
-## now you will be using a local version of python instead of your
-## system's python
-
-## to deactivate, simply type
-deactivate
-#+END_SRC
-
-*** How to Share Ipython Notebooks
-*** How to share your vagrant box
-*** Testing Python Output
-
-#+BEGIN_SRC python
-a = ('b', 200)
-b = ('x', 10)
-c = ('q', -42)
-return (a, b, c)
-#+END_SRC
-
-#+RESULTS:
-| b | 200 |
-| x |  10 |
-| q | -42 |
-
-*** Python Output
-
-#+BEGIN_SRC python
-a = ('b', 200)
-b = ('x', 10)
-c = ('q', -42)
-return (a, b, c)
-#+END_SRC
-
-By removing the :exports both, you can export just the code and not the output. By replaceing it with :exports results, you can export the output without the source. 
-
-*** Using pip once virtualenv is activated
-
-:PROPERTIES:
-:BEAMER_opt: shrink=1
-:END:
-
-#+ATTR_LATEX: width=\textwidth
-#+BEGIN_SRC sh
-## again, these should be run on the command line. 
-## first, let's activate your virtual environment, if you haven't 
-## already
-source env/bin/activate
-
-## first, let's inspect what command are available in pip
-pip help
-
-## from this, we see that there are a number of commands we will 
-## find useful
-pip list # this shows what programs are already installed
-pip search numpy # this searches for packages named "numpy"
-pip install numpy # this installs the numpy package. 
-
-## if you have many packages you want to install, you can 
-## create a requirements list
-## this will create a file with a list of modules to install
-## you can use your editor of choice to install this. 
-echo "numpy\nbeautifulsoup" > requirements.txt
-
-## this will install all the packages in the text file. 
-## NOTE: you can specify the versions of module too. Sometimes
-## this is important. 
-pip install -r requirements.txt
-
-## now let's confirm that they installed correctly
-pip list 
-
-## now if you are done with virtualenv remember to deactivate it
-deactivate
-#+END_SRC
-
-
-
-* CheatSheets
-
-** Python
-
-*** Operators
-\tiny
-#+ATTR_LaTeX: :align |c|p{2in}|l|
-| Operator | Description                                                                                                                         | Example                                         |
-| +        | Addition - Adds values on either side of the operator                                                                               | a + b will give 30                              |
-| -        | Subtraction - Subtracts right hand operand from left hand operand                                                                   | a - b will give -10                             |
-| *        | Multiplication - Multiplies values on either side of the operator                                                                   | a * b will give 200                             |
-| /        | Division - Divides left hand operand by right hand operand                                                                          | b / a will give 2                               |
-| %        | Modulus - Divides left hand operand by right hand operand and returns remainder                                                     | b % a will give 0                               |
-| **       | Exponent - Performs exponential (power) calculation on operators                                                                    | a**b will give 10 to the power 20               |
-| //       | Floor Division - The division of operands where the result is the quotient in which the digits after the decimal point are removed. | 9//2 is equal to 4 and 9.0//2.0 is equal to 4.0 |
