@@ -1,0 +1,11 @@
+
+wget -r -H -l1 -erobots=off -nd -A 'pa02*.zip' http://www.google.com/googlebooks/uspto-patents-applications-text.html
+
+# -r = recursive
+# -H = to span domains, ie can leave blog ??? 
+# -l1 = only to the depth of one 
+# -erobots=off = ignore robots.txt
+# -nd = don't follow directory structure, just drop all files into folder
+# -A 'pa01*.zip" = download only links with this regex
+
+xargs -i wget 'http://storage.googleapis.com/patents/grant_full_text/2012/{}' < list2012missing.txt

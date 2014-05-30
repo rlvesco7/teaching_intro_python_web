@@ -27,3 +27,6 @@
 ** Set path to allow
 
 #+LaTeX_CLASS_OPTIONS: [presentation,smaller]
+
+:BEAMER_opt: allowframebreaks, label=
+:BEAMER_opt: shrink=1

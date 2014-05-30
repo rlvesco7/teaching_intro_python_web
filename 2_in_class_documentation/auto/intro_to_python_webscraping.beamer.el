@@ -5,7 +5,20 @@
      "sec-2"
      "sec-3"
      "sec-4"
-     "sec-5")
+     "sec-4-1"
+     "sec-4-2"
+     "sec-5"
+     "sec-5-1"
+     "sec-5-2"
+     "sec-5-3"
+     "sec-5-4"
+     "sec-6"
+     "sec-6-1"
+     "sec-6-2"
+     "sec-7-1"
+     "sec-8-1"
+     "sec-10"
+     "sec-10-1")
     (TeX-run-style-hooks
      "attachfile2"
      "listings"

@@ -1,0 +1,24 @@
+
+import json
+import urllib2
+import pprint import pprint
+import pandas as pd
+
+prefix="http://maps.googleapis.com/maps/api/geocode/json?address="
+suffix="&sensor=false"
+address="165%20Whitney%20Avenue,%20New%20Haven,%20CT"
+url = prefix+address+suffix
+j = urllib2.urlopen(url)
+js = json.load(j)
+type(js) #if in doubt, check type
+
+#pprint(js) 
+
+#notice nested list, so use index to get into it
+rstadd = js['results'][0]['address_components']
+
+for rs in rstadd:
+    print rs['short_name'], rs['types']
+
+import pandas as pd
+pd.DataFrame(rstadd)

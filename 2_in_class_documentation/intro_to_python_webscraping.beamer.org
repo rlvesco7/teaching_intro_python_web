@@ -1,25 +1,37 @@
-#+TITLE: Intro to Python and Webscraping
+#+TITLE: Introduction to Python and Webscraping
 #+Author: Robert Vesco
+#+LaTeX_HEADER: \institute[Yale]{Yale School of Management}
 #+LaTeX_CLASS: beamer
-#+BEAMER_THEME: Frankfurt
+#+BEAMER_THEME: Montpellier
 #+BEAMER_COLOR_THEME: beaver
+#+BEAMER_INNER_THEME: rounded
+#+BEAMER_OUTER_THEME: infolines
 #+BEAMER_FONT_THEME: professionalfonts
-#+OPTIONS: H:2
+#+OPTIONS: H:3
 #+OPTIONS: toc:nil
+ # #+Latex_header: \setbeameroption{show only notes}
+#+Latex_header: \setbeameroption{show notes}
 #+Latex_header: \input{preamble.tex}
 #+Latex_header: \usepackage{attachfile2}
+#+Latex_header: \usepackage{hyperref}
 #+Latex_header: \setbeamertemplate{itemize/enumerate subbody begin}{\vspace{0.1cm}}
 #+Latex_header: \setbeamertemplate{itemize/enumerate subbody end}{\vspace{0.1cm}}
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
 
 * Intro
 
-** Class Objectives
+*** Class Objectives
+
+- Programming is hard
+http://techcrunch.com/2014/05/24/dont-believe-anyone-who-tells-you-learning-to-code-is-easy/
 
 - Introduce basic python and webscraping
 - Provide skills & knowledge not in online tutorials
 - Tools that can be used with any programming language
 
-** Plan
+
+*** Plan
 - 9 - 9:15: Setup issues
 - 9:15 - 9:30 Python in Scientific Computing
 - 9:30 - 9:45 Anaconda & Spyder
@@ -30,9 +42,10 @@
 - 3:00 - 4:30 Practice with your own site
 - 4:30 - 5:00 Other Tools, Development Environment
 
+
 * Python Context
 
-** Abbreviated/Opinionated History of Programming Languages
+*** Abbreviated/Opinionated History of Programming Languages
 
 - C, C++ 
 - Awk, Sed & shell scripts
@@ -44,15 +57,15 @@
 - Python
 - Julia (R 2.0)
 
-** Python and Stats
+*** Python and Stats
 
-** Python and Jobs
+*** Python and Jobs
 
-** Python Considerations
-*** Support For 					      :BMCOL:
+*** Python Considerations
+**** Support For						      :BMCOL:
    :PROPERTIES:
    :BEAMER_env: block
-   :BEAMER_col: 0.5
+   :BEAMER_col: 0.4
    :BEAMER_envargs: C[t]
    :END:
 - Readability & Consistency (pythonic)
@@ -60,17 +73,17 @@
 - Not Java
 - Used in biz ops & domains
 
-*** Support Against 					      :B_block:BMCOL:
+**** Support Against					      :B_block:BMCOL:
    :PROPERTIES:
    :BEAMER_env: block
-   :BEAMER_col: 0.5
-   :END:
+   :BEAMER_col: 0.4
+    :END:
 - Backward compatibility
 - Fragile package dependencies
 - Fragmentation
 - Complementary Assets for Science
 
-** The many faces and versions of Python
+*** The many faces and versions of Python
 
 - Cython (main)
 - IronPython (.net)
@@ -78,9 +91,24 @@
 - Jython (compiles to java)
 - Ipython (scientific and interactive)
 
+*** Version 2 vs 3
+
+*** Interactive Python (IPYTHON)
+
+- Designed for interactive work & scientists
+- Lots of useful features
+  - Tab completion
+  - object?, object??
+  - %run scriptname
+  - press up shows last command
+  - %who shows all variables
+  - !cmd lets you run terminal commands
+- Terminal friendly
+
+
 * Terminals
 
-** Anaconda and Spydyer
+*** Anaconda and Spydyer
 
 - Anaconda is a pre-packaged python distribution for scientists
 - Spyder is an IDE (Integrated Development Environment)
@@ -93,13 +121,14 @@ anaconda/bin/spyder
 - Open terminal within spyder
 
 
-** Why Terminals and Command Line Programs?
+*** Why Terminals and Command Line Programs?
 
 - Troubleshooting python programs
 - Managing programs and files
 - Right tool for some jobs
 
-** Shells vs Terminals
+
+*** Shells vs Terminals
 
 - Shells are programs (like python) that help you interact computer.
   - csh (c shell, mostly seen on older servers)
@@ -108,19 +137,694 @@ anaconda/bin/spyder
 - Terminals are wrappers around shells (iterm2 for macs)
 - .bashrc, .cshrc, .zshrc are configuration files for shells
 
-** 
 
-* Python Basics
+*** Paths
+- One of the biggest causes of angst
+- Exists at system and user levels
+- Order matters; best set in configuration
+#+BEGIN_SRC sh
+#in bash, zsh 
+export PATH="$PATH:/usr/local/bin/python" and press Enter.
+#in windows (dos)
+path %path%;C:\Python
+#+END_SRC
+
+
+*** CD - Change Directory 
+
+#+BEGIN_SRC sh
+pwd #your current path or %pwd 
+
+mkdir test_dir #create directory
+
+ls -laG #Show all files in directory
+
+cd test_dir #folder = directory
+
+cd ../../ #move up two directories
+
+cd - #move back to last directory
+
+cd #move to home directory
+
+cd ~/test_dir #move to folder relative to home directory
+
+touch test_dir/test_file.txt
+
+rmdir test_dir #must be empty, so fails
+
+rm -rf test_dir #-rf = recursive and force -- dangerous
+#+END_SRC
+ 
+
+*** Open files in text editor
+- Mac
+#+BEGIN_SRC sh 
+open -t filename.ext #default editor for extension
+open -a TextEdit filename.ext #forces textedit
+#alias textedit='open -a TextEdit' For .bashrc
+#+END_SRC
+- Windows 
+#+BEGIN_SRC sh
+notepad filename.txt
+#+END_SRC
+- Terminal Viewer (useful for super large files)
+#+BEGIN_SRC sh
+less -SN filename.txt
+#+END_SRC
+
+*** Find
+
+http://www.tecmint.com/35-practical-examples-of-linux-find-command/
+
+
+*** Finding programs and scripts
+- Depends on operating system
+
+#+BEGIN_SRC sh
+where python
+whereis python
+which python
+#+END_SRC
+
+
+* Python
+
+** Basics
+
+*** Programming Concepts 
+
+- Types (int, strings)
+- Data Structures
+- Variables
+- Flow structures
+- Function, Objects and Modules
+- Scripting and Programs
+
+
+*** Hello World
+
+**** Version 2 - Print Statement
+#+BEGIN_SRC python
+print "hello world"
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+hello world
+:END:
+
+**** Version 3 - Print Function
+#+BEGIN_SRC python
+print("hello world")
+#+END_SRC
+
+#+RESULTS:
+hello world
+
+**** Note 
+:PROPERTIES:
+:BEAMER_env: note
+:END:
+ 
+- stuff and stuff
+
+
+*** Comments in Python 
+
+#+BEGIN_SRC python
+# This is a single line comment
+print "stuff" # This is also a comment
+
+'''
+Multiline comments 
+Are surround by triple-quoted strings
+'''
+
+#+END_SRC
+
+**** Notes: 
+:PROPERTIES:
+:BEAMER_env: note
+:END:
+
+- stuff and stuff2
+
+
+*** Simple Scripts
+- Open a terminal. 
+#+BEGIN_SRC sh
+echo "print 'hello world'" > test.py
+python test.py 
+
+#Or make it an executable script
+echo "#\!/usr/bin/python \n print 'hello world'" > test.py
+chmod +x test.py
+./test.py
+#+END_SRC
+
+**** Notes: 
+     :PROPERTIES:
+     :BEAMER_env: note
+     :END:
+
+
+*** Basic Types
+- Numeric: int, float, long, complex
+- Sequence: str, unicode, list, tuple, bytearray, buffer, xrange
+#+BEGIN_SRC python :results output code :session :exports result
+  var1 = "test strings"
+  var2 = 3      
+  type(var1) 
+  type(var2)
+  var3 = str(3) # conversion is possible, sometimes
+  type(var3)
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_SRC python
+<type 'str'>
+<type 'int'>
+<type 'str'>
+#+END_SRC
+
+
+*** Data Structures
+- Often considered "types" or "compound types"
+- Base python has
+  - lists = ['apples',44, 'peaches']
+  - tuples = read-only lists = ('apples',44,'peaches')
+  - dictionaries = key:value pairs = {'firstname':'tom','lastname':'selleck'}
+
+
+*** Lists: Slicing
+- lists are flexible. They can be nested, shrunk, combined ...
+- Indexed starting with 0
+- Limitation: searching for elements when you don't know index #
+
+#+BEGIN_SRC python :results output code :session :exports result
+ls = [1,"a",2,"b", 1]
+ls[0]
+ls[0:2]
+ls[:]
+ls[1:]
+ls[1:4:2] #last element in step. Easy way to get odd
+#+END_SRC 
+
+#+RESULTS:
+#+BEGIN_SRC python
+1
+[1, 'a']
+[1, 'a', 2, 'b', 1]
+['a', 2, 'b', 1]
+['a', 'b']
+#+END_SRC
+
+
+*** Lists: Adding and Removing Elements
+
+#+BEGIN_SRC python :results output code :session :exports result
+ls # pre
+ls.append("add to end")
+ls.insert(1,"after second element")
+ls.insert(-1, "after second to last")
+ls.remove('a') # by value, not index
+ls # post
+ls.index('b')
+ls.count(1)
+#+END_SRC 
+
+#+RESULTS:
+#+BEGIN_SRC python
+[1, 'a', 2, 'b', 1]
+>>> >>> >>> >>> [1, 'after second element', 2, 'b', 1, 'after second to last', 'add to end']
+3
+2
+#+END_SRC
+
+
+*** Lists: Whole List Operations
+
+#+BEGIN_SRC python :results output code :session :exports result
+# Concatenate two lists
+ls.extend(["newlist added to old"])
+ls.sort()
+ls
+ls.reverse()
+ls
+#+END_SRC 
+
+#+RESULTS:
+#+BEGIN_SRC python
+[1, 1, 2, 'add to end', 'after second element', 'after second to last', 'b', 'newlist added to old']
+['newlist added to old', 'b', 'after second to last', 'after second element', 'add to end', 2, 1, 1]
+#+END_SRC
+
+
+*** Lists: List Comprehensions
+- Functions on list elements, like loops
+- Not recommended for complex scenarios
+
+#+BEGIN_SRC python :results output code :session :exports result
+ls2 = [str(x) for x in ls]
+ls2
+## nested loop, + = concat for strings
+[[x+y for x in ls2] for y in ls2]
+#+END_SRC 
+
+#+RESULTS:
+#+BEGIN_SRC python
+['1', 'a', '2', 'b', '1']
+[['11', 'a1', '21', 'b1', '11'], ['1a', 'aa', '2a', 'ba', '1a'], ['12', 'a2', '22', 'b2', '12'], ['1b', 'ab', '2b', 'bb', '1b'], ['11', 'a1', '21', 'b1', '11']]
+#+END_SRC
+
+
+*** Sets
+- Set are like lists, but must contain unique data and can't be nested
+- Allows operations such a union and intersections
+
+#+BEGIN_SRC python :results output code :session :exports result
+ls_dupes = [1,2,3,4,4,3]
+st = set(ls_dupes)
+print st
+st2 = {1,2,3,5}
+print st | st2 # union
+print st & st2 # intersection
+lss = list(st & st2) # convert back
+#+END_SRC 
+
+#+RESULTS:
+#+BEGIN_SRC python
+>>> set([1, 2, 3, 4])
+>>> set([1, 2, 3, 4, 5])
+set([1, 2, 3])
+>>> <type 'list'>
+#+END_SRC
+
+
+*** Tuples
+- Tuples are like lists, but they are immutable
+- Memory efficient because python knows how much memory to allocate
+#+BEGIN_SRC python :results output code :session :exports result
+tp = () # empty tuple
+tp1 = (1,) #tuple with one element (comma required)
+tp2 = (1,2,3)
+tp
+tp1
+tp2
+tp2[2] #slicing uses [] not ()
+#+END_SRC 
+
+#+RESULTS:
+#+BEGIN_SRC python
+()
+(1,)
+(1, 2, 3)
+3
+#+END_SRC
+
+
+*** Dictionaries
+- Represented by key:value pairs. Know as hashes, maps, associative collections
+- Key can be numbers or strings, but must be unique.
+- Value can be mutable or not, can be combined with tuples
+- Useful when you need a fast lookup based on custom key. 
+
+#+BEGIN_SRC python :results output code :session :exports result
+dct = {'first':1, 'second':2, 'third':3}
+dct['second']
+del(dct['third'])
+dct.keys()
+dct.values()
+#+END_SRC 
+
+#+RESULTS:
+#+BEGIN_SRC python
+2
+['second', 'first']
+[2, 1]
+#+END_SRC
+
+
+*** Operators
+
+
+*** Control structures
+
+
+*** Strings
+
+**** Strings vs Numbers
+#+BEGIN_SRC python :results output code :session :exports result
+string = "123456"
+number = 123456 
+string is number
+int(string) is number # different "objects"
+int(string)==number # testing equality of value
+#+END_SRC 
+
+#+RESULTS:
+#+BEGIN_SRC python
+False
+False
+True
+#+END_SRC
+
+
+**** Strings vs lists of strings
+
+#+BEGIN_SRC python :results output code :session :exports result
+a = [string]
+b = [string]
+a == b # compares equality
+a is b # compares whether objects 
+  
+#+END_SRC 
+
+#+RESULTS:
+#+BEGIN_SRC python
+
+>>> True
+False
+#+END_SRC
+
+*** Objects, Methods and Functions
+- Methods are function that operate on objects
+- Object: dog Method: eat
+- Functions
+http://stackoverflow.com/questions/8108688/in-python-when-should-i-use-a-function-instead-of-a-method
+
+
+#+BEGIN_SRC python :results output code :session :exports result
+  var1.capitalize() # method on object
+  len(var1) # also method, but functional looking
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_SRC python
+'Test strings'
+12
+#+END_SRC
+
+
+*** Modules
+
+*** Dates
+
+*** Functions
+- parameter order matters, unless name=paramater
+- anonymous functions use lambda keyword
+- return statements without value return nothing
+- Variables within function have local scope
+
+#+BEGIN_SRC python :results output code :session :exports result
+def printnum( x, y ):
+    """This passes a parameter to the print statement"""
+    print x, y
+    return
+
+printnum(y=3, x="printing this:")
+printnum("positional ordering matter if not named", 4)
+#+END_SRC 
+
+#+RESULTS:
+#+BEGIN_SRC python
+printing this: 3
+positional ordering matter is not named 4
+#+END_SRC
+
+
+*** Files I/O
+
+*** CSV files - Basic
+#+BEGIN_SRC sh
+echo -e "header1, header2\n1,2\n3,4" > test.csv
+#+END_SRC
+#+BEGIN_SRC python :results output code :session :exports result
+import csv
+fl = list(csv.reader(open("test.csv")))
+header, values = fl[0], fl[1:]
+header
+values
+fl
+#+END_SRC 
+
+#+RESULTS:
+#+BEGIN_SRC python
+['head1', 'head2']
+[['1', '2'], ['3', '4']]
+[['head1', 'head2'], ['1', '2'], ['3', '4']]
+#+END_SRC
+
+*** CSV files - Custom
+
+#+BEGIN_SRC python :results output code :session :exports result
+class customcsv(csv.Dialect):
+    lineterminator = '\n'
+    delimiter = ','
+    quoting = csv.QUOTE_NONE
+
+fl.csv = csv.reader("test.csv", dialect=customcsv)
+fl.csv
+#+END_SRC 
+
+#+RESULTS:
+#+BEGIN_SRC python
+
+
+#+END_SRC
+
+*** CSV files - Pandas - read_csv
+
+#+BEGIN_SRC python :results output code :session :exports result
+import pandas as pd
+# header=none if not in file
+# or read_table + sep(delimeter)
+fldf = pd.read_csv("test.csv")
+type(fldf) #type is different
+fldf
+#+END_SRC 
+
+#+RESULTS:
+#+BEGIN_SRC python
+<class 'pandas.core.frame.DataFrame'>
+     head1  head2
+0      1      2
+1      3      4
+
+[2 rows x 2 columns]
+#+END_SRC
+
+*** CSV files - Pandas - More Options
+- nrow=5 => read 5 rows
+- na\(\textunderscore\)rep='NULL' => set null to NULL else empty
+- index=FALSE => no indices in output
+- cols=['header1','header2'] => specify columns
+- For all options:
+http://pandas.pydata.org/pandas-docs/version/0.13.1/generated/pandas.io.parsers.read_csv.html
+
+*** CSV files - Pandas - to\(\_\)csv
+- Many of the same options as read_csv
+http://pandas.pydata.org/pandas-docs/version/0.13.1/generated/pandas.DataFrame.to_csv.html
+#+BEGIN_SRC python :results output code :session :exports result
+import os #to see directory contents
+fldf
+fldf.to_csv("files/test_out.csv")
+os.listdir('files')
+#+END_SRC 
+
+#+RESULTS:
+#+BEGIN_SRC python
+
+head1  head2
+0      1      2
+1      3      4
+
+[2 rows x 2 columns]
+>>> ['test_out.csv']
+#+END_SRC
+
+
+*** Getting Help
+- help(function) gets you the "docstring"
+#+BEGIN_SRC python :results output code :session :exports result
+help(len)
+#+END_SRC 
+
+#+RESULTS:
+#+BEGIN_SRC python
+Help on built-in function len in module __builtin__:
+
+len(...)
+    len(object) -> integer
+
+    Return the number of items of a sequence or mapping.
+#+END_SRC
+
+
+** Advanced
+
+*** Regular Expression
+
+*** Expressions
+
+*** Classes/Objects
+
+*** Common Packages
+**** Scientific
+ - Numpy: N-dimensional arrays, C integration, linear algebra
+ - SciPy: Numerical integration, optimization, depends on Numpy
+ - Matplotlib: 2d plotting
+ - Pandas: Approximates R/Stata, data cleaning, dataframes
+ - Statsmodels: For statistical models
+**** Webscraping
+- BeautifulSoup
+
+
 * Webscraping
+
+** Firefox/HTML
+
+*** HTML/XML/JSON
+
+- HTML is an implementation of XML (a meta language)
+- JavaScript Object Notation (JSON) is replacing xml for speed and readability (api) 
+
+*** Firebug
+- Firebug is tool that allow you to inspect the elements of a webpage
+directly. 
+
+*** XPATH SQL for HTML/XML
+- Xpath is a language that allows you to select "nodes" from xml
+- Note: xpath 2.0 not implemented in all cases though many examples online
+- Xpath 1.0 Tutorial
+: http://www.zvon.org/comp/r/tut-XPath_1.html#Pages~List_of_XPaths
+- Full reference
+http://www.w3.org/TR/xpath/ 
+
+
+*** JSON - Loading
+ 
+#+BEGIN_SRC python :results output code :session :exports result
+jsn = """
+    {"name":"batman",
+     "hobbies": ["fast cars", "fast planes", "spending money"],
+    "buddy":"robin",
+    "enemies": [{"name":"The Joker"},
+                {"name":"The People of Gotham"}]
+                }
+"""
+import json
+#NOTE: loads for strings, load for files
+rslt = json.loads(jsn) #put this into a form for python
+print rslt
+jsn_again = json.dumps(rslt) #back to json
+ #+END_SRC 
+
+ #+RESULTS:
+ #+BEGIN_SRC python
+{u'buddy': u'robin', u'enemies': [{u'name': u'The Joker'}, {u'name': u'The People of Gotham'}], u'name': u'batman', u'hobbies': [u'fast cars', u'fast planes', u'spending money']}
+ #+END_SRC
+
+*** JSON - Converting to DataFrames
+
+#+BEGIN_SRC python :results output code :session :exports result
+enemies = pd.DataFrame(rslt['enemies'], columns=['name'])
+enemies
+#+END_SRC 
+
+#+RESULTS:
+#+BEGIN_SRC python
+              name
+0             The Joker
+1             The People of Gotham
+
+[2 rows x 1 columns]
+#+END_SRC
+
+
+*** JSON - Converting to DataFrames
+
+#+BEGIN_SRC python :results output code :session :exports result
+enemies = pd.DataFrame(rslt['enemies'], columns=['name'])
+enemies
+#+END_SRC 
+
+#+RESULTS:
+#+BEGIN_SRC python
+              name
+0             The Joker
+1  The People of Gotham
+
+[2 rows x 1 columns]
+#+END_SRC
+
+*** JSON - Example
+
+#+BEGIN_SRC python :results output code :session :exports result
+import json
+import urllib2
+import pprint import pprint
+import pandas as pd
+
+prefix="http://maps.googleapis.com/maps/api/geocode/json?address="
+suffix="&sensor=false"
+address="165%20Whitney%20Avenue,%20New%20Haven,%20CT"
+url = prefix+address+suffix
+j = urllib2.urlopen(url)
+js = json.load(j)
+type(js) #if in doubt, check type
+
+#pprint(js) 
+
+#notice nested list, so use index to get into it
+rstadd = js['results'][0]['address_components']
+
+for rs in rstadd:
+    print rs['short_name'], rs['types']
+
+import pandas as pd
+pd.DataFrame(rstadd)
+#+END_SRC 
+
+*** Regular Expressions (Regex)
+- Regex came from perl, used to find text patterns
+- To fragile for webscraping, but important complement
+
 * Development
+
+** Paths
+
+stuff
+
+** Other
+
+Stuff
+
+
+* Other resources
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
+
+*** Git
+
+http://wildlyinaccurate.com/a-hackers-guide-to-git
+
+** Python
+*** Operators
+
+*** Setting Up Your Development Environment
+
+
 * BEAMER Slide Examples 
 :PROPERTIES:
 :BEAMER_env: ignoreheading
 :END:
 
-** Top Aligned Blocks
+*** Top Aligned Blocks
 
-*** Code						      :B_block:BMCOL:
+**** Code						      :B_block:BMCOL:
    :PROPERTIES:
    :BEAMER_env: block
    :BEAMER_col: 0.5
@@ -134,7 +838,7 @@ To talk
 
 about
 
-*** Result						      :B_block:BMCOL:
+**** Result						      :B_block:BMCOL:
     :PROPERTIES:
     :BEAMER_env: block
     :BEAMER_col: 0.5
@@ -145,16 +849,16 @@ pretty nice!
 ** Inline math
 
 
-** Beamer: Animated Bullets
+*** Beamer: Animated Bullets
 
 #+ATTR_BEAMER: :overlay +-
      - Trouble Shooting
      - A framework for thinking about programming
 
 
-** Beamer Columns
+*** Beamer Columns
 
-*** Stuff							      :BMCOL:
+**** Stuff							      :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.5 
 :END:
@@ -162,7 +866,7 @@ pretty nice!
 - Truth is ephemeral
 
 
-*** Stuff 2						      :BMCOL:B_block:
+**** Stuff 2						      :BMCOL:B_block:
 :PROPERTIES:
 :BEAMER_col: 0.5 
 :END:
@@ -175,49 +879,54 @@ pretty nice!
 :BEAMER_env: ignoreheading
 :END:
 
+*** setting python paths
 
-** How to use virtualenv & pip 
+#+BEGIN_example
+:Setting environment variables (like PYTHONPATH)
+:Create an emacs-lisp code block that looks like this:
+
+:#+BEGIN_SRC emacs-lisp
+:(setenv "PYTHONPATH" "/Users/neilsen/Development/obswatch-trunk/common/python")
+:#+END_SRC
+:Execute it, and it changes the environment accordingly.
+:Note that you can also append to environment variables like this:
+
+:#+BEGIN_SRC emacs-lisp
+:(setenv "PYTHONPATH" (concat (getenv "PYTHONPATH") ":" (getenv "DQSTATS_DIR")))
+:#+END_SRC
+:#+END_SRC
+#+end_example
+
+
+
+*** How to use virtualenv & pip 
 
 #+BEGIN_SRC sh
-  ## run this on the command line
-  ## assuming you are in your projects folder, create a new folder
-  mkdir projects1 
-  
-  cd projects1
-  
-  ## now create your virtualenv environment
-  ## this will create a folder called "env". 
-  ## this will house a local version of python. 
-  virtualenv env 
-  
-  ## IMPORTANT. 
-  ## Now you need to activate your environment. 
-  source env/bin/activate
-  
-  ## now you will be using a local version of python instead of your
-  ## system's python
-  
-  ## to deactivate, simply type
-  deactivate
+## run this on the command line
+## assuming you are in your projects folder, create a new folder
+mkdir projects1 
+
+cd projects1
+
+## now create your virtualenv environment
+## this will create a folder called "env". 
+## this will house a local version of python. 
+virtualenv env 
+
+## IMPORTANT. 
+## Now you need to activate your environment. 
+source env/bin/activate
+
+## now you will be using a local version of python instead of your
+## system's python
+
+## to deactivate, simply type
+deactivate
 #+END_SRC
 
-** How to Share Ipython Notebooks
-
-** How to share your vagrant box
-** Testing Python Output
-
-#+BEGIN_SRC python :exports both
-a = ('b', 200)
-b = ('x', 10)
-c = ('q', -42)
-return (a, b, c)
-#+END_SRC
-
-#+RESULTS:
-| b | 200 |
-| x |  10 |
-| q | -42 |
-** Python Output
+*** How to Share Ipython Notebooks
+*** How to share your vagrant box
+*** Testing Python Output
 
 #+BEGIN_SRC python
 a = ('b', 200)
@@ -231,44 +940,71 @@ return (a, b, c)
 | x |  10 |
 | q | -42 |
 
+*** Python Output
+
+#+BEGIN_SRC python
+a = ('b', 200)
+b = ('x', 10)
+c = ('q', -42)
+return (a, b, c)
+#+END_SRC
+
 By removing the :exports both, you can export just the code and not the output. By replaceing it with :exports results, you can export the output without the source. 
-** Using pip once virtualenv is activated
+
+*** Using pip once virtualenv is activated
 
 :PROPERTIES:
-:EXPORT_LaTeX_HEADER:  {\lstset{commentstyle=\color{red}}} 
+:BEAMER_opt: shrink=1
 :END:
 
-#+BEGIN_SRC sh 
-  ## again, these should be run on the command line. 
-  ## first, let's activate your virtual environment, if you haven't 
-  ## already
-  source env/bin/activate
-  
-  ## first, let's inspect what command are available in pip
-  pip help
-  
-  ## from this, we see that there are a number of commands we will 
-  ## find useful
-  pip list # this shows what programs are already installed
-  pip search numpy # this searches for packages named "numpy"
-  pip install numpy # this installs the numpy package. 
-  
-  ## if you have many packages you want to install, you can 
-  ## create a requirements list
-  ## this will create a file with a list of modules to install
-  ## you can use your editor of choice to install this. 
-  echo "numpy\nbeautifulsoup" > requirements.txt
-  
-  ## this will install all the packages in the text file. 
-  ## NOTE: you can specify the versions of module too. Sometimes
-  ## this is important. 
-  pip install -r requirements.txt
-  
-  ## now let's confirm that they installed correctly
-  pip list 
-  
-  ## now if you are done with virtualenv remember to deactivate it
-  deactivate
+#+ATTR_LATEX: width=\textwidth
+#+BEGIN_SRC sh
+## again, these should be run on the command line. 
+## first, let's activate your virtual environment, if you haven't 
+## already
+source env/bin/activate
+
+## first, let's inspect what command are available in pip
+pip help
+
+## from this, we see that there are a number of commands we will 
+## find useful
+pip list # this shows what programs are already installed
+pip search numpy # this searches for packages named "numpy"
+pip install numpy # this installs the numpy package. 
+
+## if you have many packages you want to install, you can 
+## create a requirements list
+## this will create a file with a list of modules to install
+## you can use your editor of choice to install this. 
+echo "numpy\nbeautifulsoup" > requirements.txt
+
+## this will install all the packages in the text file. 
+## NOTE: you can specify the versions of module too. Sometimes
+## this is important. 
+pip install -r requirements.txt
+
+## now let's confirm that they installed correctly
+pip list 
+
+## now if you are done with virtualenv remember to deactivate it
+deactivate
 #+END_SRC
 
 
+
+* CheatSheets
+
+** Python
+
+*** Operators
+\tiny
+#+ATTR_LaTeX: :align |c|p{2in}|l|
+| Operator | Description                                                                                                                         | Example                                         |
+| +        | Addition - Adds values on either side of the operator                                                                               | a + b will give 30                              |
+| -        | Subtraction - Subtracts right hand operand from left hand operand                                                                   | a - b will give -10                             |
+| *        | Multiplication - Multiplies values on either side of the operator                                                                   | a * b will give 200                             |
+| /        | Division - Divides left hand operand by right hand operand                                                                          | b / a will give 2                               |
+| %        | Modulus - Divides left hand operand by right hand operand and returns remainder                                                     | b % a will give 0                               |
+| **       | Exponent - Performs exponential (power) calculation on operators                                                                    | a**b will give 10 to the power 20               |
+| //       | Floor Division - The division of operands where the result is the quotient in which the digits after the decimal point are removed. | 9//2 is equal to 4 and 9.0//2.0 is equal to 4.0 |
