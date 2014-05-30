@@ -1,4 +1,4 @@
-% Created 2014-05-29 Thu 23:25
+% Created 2014-05-30 Fri 04:58
 \documentclass[presentation]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -239,21 +239,7 @@ less -SN filename.txt
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-3-0-4]{Finding programs and scripts}
- \begin{itemize}
-\item Depends on operating system
-\end{itemize}
-
-\lstset{numbers=left,language=sh,label= ,caption= }
-\begin{lstlisting}
-where python
-whereis python
-which python
-\end{lstlisting}
-\end{frame}
-
-
-\begin{frame}[label=sec-3-0-5]{Sudo, Elevated Rights, Admin}
+\begin{frame}[label=sec-3-0-4]{Sudo, Elevated Rights, Admin}
 \begin{itemize}
 \item Mac/Linux: sudo cmd file
 \item Windows: runas /user:admin
@@ -263,7 +249,7 @@ which python
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-3-0-6]{File Permissions}
+\begin{frame}[fragile,label=sec-3-0-5]{File Permissions}
  \lstset{numbers=left,language=sh,label= ,caption= }
 \begin{lstlisting}
 ls -laG #show all files and permissions
@@ -271,24 +257,82 @@ ls -laG #show all files and permissions
 
 D = directory \\
 4 = Read (r) \\
-3 = Write (w) \\
+2 = Write (w) \\
 1 = Execute(x) \\
 777 = All rights for User, Group, Everyone <= BAD
 
 \begin{itemize}
+\item What is rwx-rw-r-- in numerical permissions?
+
 \item Scripts will often need execution rights
 \end{itemize}
 \lstset{numbers=left,language=sh,label= ,caption= }
 \begin{lstlisting}
-touch test_script.py
-la -laG
-chmod +x test_script.py
-la -laG
+chmod +x filename
 \end{lstlisting}
 \end{frame}
 
 
-\begin{frame}[label=sec-3-0-7]{Shells vs Terminals}
+\begin{frame}[fragile,label=sec-3-0-6]{Finding programs and scripts}
+ \begin{itemize}
+\item Depends on operating system
+\end{itemize}
+
+\lstset{numbers=left,language=sh,label= ,caption= }
+\begin{lstlisting}
+where programname
+which programname #will give unix style path on windows
+whereis programname #not on all programs
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile,label=sec-3-0-7]{Simple Scripts}
+ \begin{itemize}
+\item Scripts should begin with \#!PathToYourExecutable
+\end{itemize}
+\lstset{numbers=left,language=sh,label= ,caption= }
+\begin{lstlisting}
+#non-standard script
+echo "print 'hello world'" > test.py
+cat test.py # shows contents
+ls -laG #look at the file 
+
+python test.py 
+
+echo -e "#\!PATHTOYOURPYTHON \n print 'hello world'" > test.py
+less test.py #spits it out to terminal to viewer
+./test.py
+\end{lstlisting}
+\begin{itemize}
+\item How can we make the second way work?
+\end{itemize}
+
+\lstset{numbers=left,language=sh,label= ,caption= }
+\begin{lstlisting}
+which env 
+!#/path/to/env python #absolute path not needed
+\end{lstlisting}
+
+\note{Notes:
+}
+\end{frame}
+
+
+
+\begin{frame}[label=sec-3-0-8]{Wget}
+\begin{itemize}
+\item Flexible, fast tool for downloading \& spidering
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label=sec-3-0-9]{Find}
+\url{http://www.tecmint.com/35-practical-examples-of-linux-find-command/}
+\end{frame}
+
+
+\begin{frame}[label=sec-3-0-10]{Shells vs Terminals}
 \begin{itemize}
 \item Shells are programs (like python) that help you interact computer.
 \begin{itemize}
@@ -302,7 +346,7 @@ la -laG
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-3-0-8]{Paths}
+\begin{frame}[fragile,label=sec-3-0-11]{Paths}
  \begin{itemize}
 \item One of the biggest causes of angst
 \item Exists at system and user levels
@@ -327,11 +371,6 @@ path %path%;C:\Python #temp
 export PATH="$PATH:/usr/local/bin/python"
 PATH=$PATH:/my/new/path #temporary
 \end{lstlisting}
-\end{frame}
-
-
-\begin{frame}[label=sec-3-0-9]{Find}
-\url{http://www.tecmint.com/35-practical-examples-of-linux-find-command/}
 \end{frame}
 
 
@@ -413,27 +452,9 @@ Are surround by triple-quoted strings
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-4]{Simple Scripts}
- \begin{itemize}
-\item Open a terminal.
-\end{itemize}
-\lstset{numbers=left,language=sh,label= ,caption= }
-\begin{lstlisting}
-echo "print 'hello world'" > test.py
-python test.py 
-
-#Or make it an executable script
-echo "#\!/usr/bin/python \n print 'hello world'" > test.py
-chmod +x test.py
-./test.py
-\end{lstlisting}
-
-\note{Notes:
-}
-\end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-5]{Basic Types}
+\begin{frame}[fragile,label=sec-4-1-4]{Basic Types}
  \begin{itemize}
 \item Numeric: int, float, long, complex
 \item Sequence: str, unicode, list, tuple, bytearray, buffer, xrange
@@ -457,7 +478,7 @@ type(var3)
 \end{frame}
 
 
-\begin{frame}[label=sec-4-1-6]{Data Structures}
+\begin{frame}[label=sec-4-1-5]{Data Structures}
 \begin{itemize}
 \item Often considered "types" or "compound types"
 \item Base python has
@@ -470,7 +491,7 @@ type(var3)
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-7]{Lists: Slicing}
+\begin{frame}[fragile,label=sec-4-1-6]{Lists: Slicing}
  \begin{itemize}
 \item lists are flexible. They can be nested, shrunk, combined \ldots{}
 \item Indexed starting with 0
@@ -498,7 +519,7 @@ ls[1:4:2] #last element in step. Easy way to get odd
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-8]{Lists: Adding and Removing Elements}
+\begin{frame}[fragile,label=sec-4-1-7]{Lists: Adding and Removing Elements}
  \lstset{numbers=left,language=Python,label= ,caption= }
 \begin{lstlisting}
 ls # pre
@@ -521,7 +542,7 @@ ls.count(1)
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-9]{Lists: Whole List Operations}
+\begin{frame}[fragile,label=sec-4-1-8]{Lists: Whole List Operations}
  \lstset{numbers=left,language=Python,label= ,caption= }
 \begin{lstlisting}
 # Concatenate two lists
@@ -540,7 +561,7 @@ ls
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-10]{Lists: List Comprehensions}
+\begin{frame}[fragile,label=sec-4-1-9]{Lists: List Comprehensions}
  \begin{itemize}
 \item Functions on list elements, like loops
 \item Not recommended for complex scenarios
@@ -562,7 +583,7 @@ ls2
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-11]{Sets}
+\begin{frame}[fragile,label=sec-4-1-10]{Sets}
  \begin{itemize}
 \item Set are like lists, but must contain unique data and can't be nested
 \item Allows operations such a union and intersections
@@ -589,7 +610,7 @@ set([1, 2, 3])
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-12]{Tuples}
+\begin{frame}[fragile,label=sec-4-1-11]{Tuples}
  \begin{itemize}
 \item Tuples are like lists, but they are immutable
 \item Memory efficient because python knows how much memory to allocate
@@ -615,7 +636,7 @@ tp2[2] #slicing uses [] not ()
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-13]{Dictionaries}
+\begin{frame}[fragile,label=sec-4-1-12]{Dictionaries}
  \begin{itemize}
 \item Represented by key:value pairs. Know as hashes, maps, associative collections
 \item Key can be numbers or strings, but must be unique.
@@ -641,15 +662,15 @@ dct.values()
 \end{frame}
 
 
-\begin{frame}[label=sec-4-1-14]{Operators}
+\begin{frame}[label=sec-4-1-13]{Operators}
 \end{frame}
 
 
-\begin{frame}[label=sec-4-1-15]{Control structures}
+\begin{frame}[label=sec-4-1-14]{Control structures}
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-16]{Strings}
+\begin{frame}[fragile,label=sec-4-1-15]{Strings}
  \begin{block}{Strings vs Numbers}
 \lstset{numbers=left,language=Python,label= ,caption= }
 \begin{lstlisting}
@@ -686,7 +707,7 @@ False
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-4-1-17]{Objects, Methods and Functions}
+\begin{frame}[fragile,label=sec-4-1-16]{Objects, Methods and Functions}
  \begin{itemize}
 \item Methods are function that operate on objects
 \item Object: dog Method: eat
@@ -709,13 +730,13 @@ len(var1) # also method, but functional looking
 \end{frame}
 
 
-\begin{frame}[label=sec-4-1-18]{Modules}
+\begin{frame}[label=sec-4-1-17]{Modules}
 \end{frame}
 
-\begin{frame}[label=sec-4-1-19]{Dates}
+\begin{frame}[label=sec-4-1-18]{Dates}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-4-1-20]{Functions}
+\begin{frame}[fragile,label=sec-4-1-19]{Functions}
  \begin{itemize}
 \item parameter order matters, unless name=paramater
 \item anonymous functions use lambda keyword
@@ -742,10 +763,10 @@ positional ordering matter is not named 4
 \end{frame}
 
 
-\begin{frame}[label=sec-4-1-21]{Files I/O}
+\begin{frame}[label=sec-4-1-20]{Files I/O}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-4-1-22]{CSV files - Basic}
+\begin{frame}[fragile,label=sec-4-1-21]{CSV files - Basic}
  \lstset{numbers=left,language=sh,label= ,caption= }
 \begin{lstlisting}
 echo -e "header1, header2\n1,2\n3,4" > test.csv
@@ -768,7 +789,7 @@ fl
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-4-1-23]{CSV files - Custom}
+\begin{frame}[fragile,label=sec-4-1-22]{CSV files - Custom}
  \lstset{numbers=left,language=Python,label= ,caption= }
 \begin{lstlisting}
 class customcsv(csv.Dialect):
@@ -781,7 +802,7 @@ fl.csv
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-4-1-24]{CSV files - Pandas - read$_{\text{csv}}$}
+\begin{frame}[fragile,label=sec-4-1-23]{CSV files - Pandas - read$_{\text{csv}}$}
  \lstset{numbers=left,language=Python,label= ,caption= }
 \begin{lstlisting}
 import pandas as pd
@@ -803,7 +824,7 @@ fldf
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label=sec-4-1-25]{CSV files - Pandas - More Options}
+\begin{frame}[label=sec-4-1-24]{CSV files - Pandas - More Options}
 \begin{itemize}
 \item nrow=5 => read 5 rows
 \item na\(\textunderscore\)rep='NULL' => set null to NULL else empty
@@ -814,7 +835,7 @@ fldf
 \url{http://pandas.pydata.org/pandas-docs/version/0.13.1/generated/pandas.io.parsers.read_csv.html}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-4-1-26]{CSV files - Pandas - to\(\_\)csv}
+\begin{frame}[fragile,label=sec-4-1-25]{CSV files - Pandas - to\(\_\)csv}
  \begin{itemize}
 \item Many of the same options as read$_{\text{csv}}$
 \end{itemize}
@@ -839,7 +860,7 @@ head1  head2
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-27]{Getting Help}
+\begin{frame}[fragile,label=sec-4-1-26]{Getting Help}
  \begin{itemize}
 \item help(function) gets you the "docstring"
 \end{itemize}

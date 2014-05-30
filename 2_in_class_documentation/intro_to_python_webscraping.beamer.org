@@ -1,6 +1,6 @@
 #+TITLE: Introduction to Python and Webscraping
 #+Author: Robert Vesco
-#+LaTeX_HEADER: \institute[Yale]{Yale School of Management}
+#+LaTeX_HEADER: \institute[Yale]{Yale School of Management - ILO}
 #+LaTeX_CLASS: beamer
 #+BEAMER_THEME: Montpellier
 #+BEAMER_COLOR_THEME: beaver
@@ -20,14 +20,11 @@
 #+EXPORT_EXCLUDE_TAGS: noexport
 
 * Intro
-
 *** Class Objectives
 
-- Programming is (can be) hard
-http://techcrunch.com/2014/05/24/dont-believe-anyone-who-tells-you-learning-to-code-is-easy/
-
-- Introduce basic python and webscraping
+- Introduce basic python relevant to webscraping
 - Provide skills & knowledge not in online tutorials
+http://techcrunch.com/2014/05/24/dont-believe-anyone-who-tells-you-learning-to-code-is-easy/
 - Tools that can be used with any programming language
 - Provide some guidance for your personal projects
 
@@ -44,11 +41,11 @@ http://techcrunch.com/2014/05/24/dont-believe-anyone-who-tells-you-learning-to-c
   - 12:00 Lunch (30 min)
   - 1:30 (10 min)
 
+
 * Python Context
 
-*** Opinionated  History of Programming Languages
+*** Opinionated Semi-History of Programming Languages
 
-- Lisp
 - C, C++ 
 - Awk, Sed & shell scripts
 - Practical Extraction and Reporting (perl)
@@ -113,6 +110,8 @@ https://medium.com/@deliciousrobots/5d2ad703365d/
 Python 3 can revive Python
 https://medium.com/p/2a7af4788b10
 
+- Python 3 is to Python what Windows 8 is to Windows
+
 *** Interactive Python (IPYTHON)
 
 - Designed for interactive work & scientists
@@ -124,6 +123,7 @@ https://medium.com/p/2a7af4788b10
   - %who shows all variables
   - !cmd lets you run terminal commands
 - Terminal friendly
+
 * Terminals
 
 *** Why Terminals and Command Line Programs?
@@ -183,7 +183,6 @@ less -SN filename.txt
 - Best to minimize programs running at elevated rights
 - Modifying system files usually require this. 
 
-
 *** File Permissions
 
 #+BEGIN_SRC sh
@@ -197,6 +196,7 @@ D = directory \\
 777 = All rights for User, Group, Everyone <= BAD
 
 - What is rwx-rw-r-- in numerical permissions?
+- When will sudo be needed?
 
 - Scripts will often need execution rights
 #+BEGIN_SRC sh
@@ -233,7 +233,7 @@ less test.py #spits it out to terminal to viewer
 
 #+BEGIN_SRC sh
 which env 
-!#/path/to/env python #absolute path not needed
+# !#/path/to/env python #absolute path not needed
 #+END_SRC
 
 **** Notes: 
@@ -241,15 +241,25 @@ which env
      :BEAMER_env: note
      :END:
 
-
-
-*** Wget 
-- Flexible, fast tool for downloading & spidering
-
 *** Find
 
-http://www.tecmint.com/35-practical-examples-of-linux-find-command/
+- Flexibly file finder -- very important for webscraping
+- Criteria: permissions, size, date, users, file type, dir ...
 
+#+BEGIN_SRC sh
+find dir -options option \;
+
+find . -maxdepth 1 -type f -name "*.py" -print -exec chmod +x {} \;
+# . = current directory
+# maxdepth = 1 directory down
+# f = files only, not directories
+# *.py = all .py file endings
+# - exec = execute a command on found files
+# {} variable container for found files
+# need to be closed \; when using exec
+#+END_SRC
+
+http://www.tecmint.com/35-practical-examples-of-linux-find-command/
 
 *** Shells vs Terminals
 
@@ -259,7 +269,6 @@ http://www.tecmint.com/35-practical-examples-of-linux-find-command/
   - zsh (most convenient)
 - Terminals are wrappers around shells (iterm2 for macs)
 - .bashrc, .cshrc, .zshrc are configuration files for shells
-
 
 *** Paths
 - One of the biggest causes of angst
@@ -281,6 +290,12 @@ export PATH="$PATH:/usr/local/bin/python"
 PATH=$PATH:/my/new/path #temporary
 #+END_SRC
 
+*** Git 
+- Git is a code versioning tools, but used to redistribute software
+
+
+*** Wget 
+- Flexible, fast tool for downloading & spidering
 
 * Python
 
@@ -298,6 +313,7 @@ anaconda/bin/spyder
 
 
 ** Basics
+
 
 *** Programming Concepts 
 

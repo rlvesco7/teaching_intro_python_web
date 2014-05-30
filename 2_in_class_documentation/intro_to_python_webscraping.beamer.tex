@@ -1,4 +1,4 @@
-% Created 2014-05-29 Thu 23:35
+% Created 2014-05-30 Fri 05:05
 \documentclass[presentation]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -18,7 +18,7 @@
 \tolerance=1000
 \usepackage{color}
 \usepackage{listings}
-\institute[Yale]{Yale School of Management}
+\institute[Yale]{Yale School of Management / ILO}
 \setbeameroption{show notes}
 \input{preamble.tex}
 \usepackage{attachfile2}
@@ -239,21 +239,7 @@ less -SN filename.txt
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-3-0-4]{Finding programs and scripts}
- \begin{itemize}
-\item Depends on operating system
-\end{itemize}
-
-\lstset{numbers=left,language=sh,label= ,caption= }
-\begin{lstlisting}
-where python
-whereis python
-which python
-\end{lstlisting}
-\end{frame}
-
-
-\begin{frame}[label=sec-3-0-5]{Sudo, Elevated Rights, Admin}
+\begin{frame}[label=sec-3-0-4]{Sudo, Elevated Rights, Admin}
 \begin{itemize}
 \item Mac/Linux: sudo cmd file
 \item Windows: runas /user:admin
@@ -263,7 +249,7 @@ which python
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-3-0-6]{File Permissions}
+\begin{frame}[fragile,label=sec-3-0-5]{File Permissions}
  \lstset{numbers=left,language=sh,label= ,caption= }
 \begin{lstlisting}
 ls -laG #show all files and permissions
@@ -286,22 +272,48 @@ chmod +x filename
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-0-7]{Simple Scripts}
- \lstset{numbers=left,language=sh,label= ,caption= }
-\begin{lstlisting}
-echo "print 'hello world'" > test.py
 
+\begin{frame}[fragile,label=sec-3-0-6]{Finding programs and scripts}
+ \begin{itemize}
+\item Depends on operating system
+\end{itemize}
+
+\lstset{numbers=left,language=sh,label= ,caption= }
+\begin{lstlisting}
+where programname
+which programname #will give unix style path on windows
+whereis programname #not on all programs
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile,label=sec-3-0-7]{Simple Scripts}
+ \begin{itemize}
+\item Scripts should begin with \#!PathToYourExecutable
+\end{itemize}
+\lstset{numbers=left,language=sh,label= ,caption= }
+\begin{lstlisting}
+#non-standard script
+echo "print 'hello world'" > test.py
+cat test.py # shows contents
 ls -laG #look at the file 
 
 python test.py 
 
-echo "#\!/usr/bin/python \n print 'hello world'" > test.py
+echo -e "#\!PATHTOYOURPYTHON \n print 'hello world'" > test.py
+less test.py #spits it out to terminal to viewer
 ./test.py
 \end{lstlisting}
-
 \begin{itemize}
 \item How can we make the second way work?
 \end{itemize}
+
+\lstset{numbers=left,language=sh,label= ,caption= }
+\begin{lstlisting}
+which env 
+# !#/path/to/env python #absolute path not needed
+\end{lstlisting}
 
 \note{Notes:
 }
@@ -309,12 +321,18 @@ echo "#\!/usr/bin/python \n print 'hello world'" > test.py
 
 
 
-\begin{frame}[label=sec-3-0-8]{Find}
+\begin{frame}[label=sec-3-0-8]{Wget}
+\begin{itemize}
+\item Flexible, fast tool for downloading \& spidering
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label=sec-3-0-9]{Find}
 \url{http://www.tecmint.com/35-practical-examples-of-linux-find-command/}
 \end{frame}
 
 
-\begin{frame}[label=sec-3-0-9]{Shells vs Terminals}
+\begin{frame}[label=sec-3-0-10]{Shells vs Terminals}
 \begin{itemize}
 \item Shells are programs (like python) that help you interact computer.
 \begin{itemize}
@@ -328,7 +346,7 @@ echo "#\!/usr/bin/python \n print 'hello world'" > test.py
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-3-0-10]{Paths}
+\begin{frame}[fragile,label=sec-3-0-11]{Paths}
  \begin{itemize}
 \item One of the biggest causes of angst
 \item Exists at system and user levels
