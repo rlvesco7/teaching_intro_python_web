@@ -1,4 +1,4 @@
-% Created 2014-05-29 Thu 21:41
+% Created 2014-05-29 Thu 23:35
 \documentclass[presentation]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -46,7 +46,7 @@
 
 \begin{frame}[label=sec-1-0-1]{Class Objectives}
 \begin{itemize}
-\item Programming is hard
+\item Programming is (can be) hard
 \end{itemize}
 \url{http://techcrunch.com/2014/05/24/dont-believe-anyone-who-tells-you-learning-to-code-is-easy/}
 
@@ -54,49 +54,67 @@
 \item Introduce basic python and webscraping
 \item Provide skills \& knowledge not in online tutorials
 \item Tools that can be used with any programming language
+\item Provide some guidance for your personal projects
 \end{itemize}
 \end{frame}
-
 
 \begin{frame}[label=sec-1-0-2]{Plan}
 \begin{itemize}
-\item 9 - 9:15: Setup issues
-\item 9:15 - 9:30 Python in Scientific Computing
-\item 9:30 - 9:45 Anaconda \& Spyder
-\item 9:45 - 10:30 Command line basics
-\item 10:30 - 12:00 Python Basics
-\item 12:00 - 12:30 Lunch
-\item 12:30 - 3:00 Python Webscraping
-\item 3:00 - 4:30 Practice with your own site
-\item 4:30 - 5:00 Other Tools, Development Environment
+\item Content
+\begin{itemize}
+\item Why Python?
+\item Working From the Command Line
+\item Python
+\item Webscraping
+\item Discuss sites YOU want to scrape
+\item Development environments
+\end{itemize}
+\item Breaks 
+\begin{itemize}
+\item 10:30 (10 min)
+\item 12:00 Lunch (30 min)
+\item 1:30 (10 min)
+\end{itemize}
 \end{itemize}
 \end{frame}
-
 
 \section{Python Context}
 \label{sec-2}
 
-\begin{frame}[label=sec-2-0-1]{Abbreviated/Opinionated History of Programming Languages}
+\begin{frame}[label=sec-2-0-1]{Opinionated  History of Programming Languages}
 \begin{itemize}
+\item Lisp
 \item C, C++
 \item Awk, Sed \& shell scripts
 \item Practical Extraction and Reporting (perl)
 \item S (R precursor)
 \item Java
-\item Ruby (perl 2.0)
+\item Ruby
 \item R
+\item Haskell
+\item Clojure (Incanter)
 \item Python
-\item Julia (R 2.0)
+\item Julia
 \end{itemize}
 \end{frame}
 
 \begin{frame}[label=sec-2-0-2]{Python and Stats}
+\includegraphics[width=.9\linewidth]{./images/lang_and_regression.png}
 \end{frame}
 
-\begin{frame}[label=sec-2-0-3]{Python and Jobs}
+\begin{frame}[label=sec-2-0-3]{Python and Journals}
+\includegraphics[width=.9\linewidth]{./images/lang_in_journals.png}
 \end{frame}
 
-\begin{frame}[label=sec-2-0-4]{Python Considerations}
+\begin{frame}[label=sec-2-0-4]{Homogenization of Programming}
+\url{http://www.talyarkoni.org/blog/2013/11/18/the-homogenization-of-scientific-computing-or-why-python-is-steadily-eating-other-languages-lunch/} 
+
+\begin{itemize}
+\item TLDR: One tool for many problems
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label=sec-2-0-5]{Python Considerations}
 \begin{columns}
 \begin{column}{0.4\textwidth}
 \begin{block}{Support For}
@@ -122,20 +140,25 @@
 \end{columns}
 \end{frame}
 
-\begin{frame}[label=sec-2-0-5]{The many faces and versions of Python}
+\begin{frame}[label=sec-2-0-6]{The many faces and versions of Python}
 \begin{itemize}
-\item Cython (main)
+\item Cython (python to c to python)
 \item IronPython (.net)
 \item PyPy (JIT)
-\item Jython (compiles to java)
+\item Jython (Java)
 \item Ipython (scientific and interactive)
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label=sec-2-0-6]{Version 2 vs 3}
+\begin{frame}[label=sec-2-0-7]{Version 2 vs 3}
+Python 3 is killing Python
+\url{https://medium.com/@deliciousrobots/5d2ad703365d/} 
+
+Python 3 can revive Python
+\url{https://medium.com/p/2a7af4788b10}
 \end{frame}
 
-\begin{frame}[label=sec-2-0-7]{Interactive Python (IPYTHON)}
+\begin{frame}[label=sec-2-0-8]{Interactive Python (IPYTHON)}
 \begin{itemize}
 \item Designed for interactive work \& scientists
 \item Lots of useful features
@@ -150,69 +173,18 @@
 \item Terminal friendly
 \end{itemize}
 \end{frame}
-
-
 \section{Terminals}
 \label{sec-3}
 
-\begin{frame}[fragile,label=sec-3-0-1]{Anaconda and Spydyer}
- \begin{itemize}
-\item Anaconda is a pre-packaged python distribution for scientists
-\item Spyder is an IDE (Integrated Development Environment)
-\item Open a terminal or click spyder
-\end{itemize}
-
-\lstset{numbers=left,language=sh,label= ,caption= }
-\begin{lstlisting}
-anaconda/bin/spyder
-\end{lstlisting}
-
-\begin{itemize}
-\item Open terminal within spyder
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}[label=sec-3-0-2]{Why Terminals and Command Line Programs?}
+\begin{frame}[label=sec-3-0-1]{Why Terminals and Command Line Programs?}
 \begin{itemize}
 \item Troubleshooting python programs
-\item Managing programs and files
+\item Managing programs and files (very important for webscraping)
 \item Right tool for some jobs
 \end{itemize}
 \end{frame}
 
-
-\begin{frame}[label=sec-3-0-3]{Shells vs Terminals}
-\begin{itemize}
-\item Shells are programs (like python) that help you interact computer.
-\begin{itemize}
-\item csh (c shell, mostly seen on older servers)
-\item bash (most common)
-\item zsh (most convenient)
-\end{itemize}
-\item Terminals are wrappers around shells (iterm2 for macs)
-\item .bashrc, .cshrc, .zshrc are configuration files for shells
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}[fragile,label=sec-3-0-4]{Paths}
- \begin{itemize}
-\item One of the biggest causes of angst
-\item Exists at system and user levels
-\item Order matters; best set in configuration
-\end{itemize}
-\lstset{numbers=left,language=sh,label= ,caption= }
-\begin{lstlisting}
-#in bash, zsh 
-export PATH="$PATH:/usr/local/bin/python" and press Enter.
-#in windows (dos)
-path %path%;C:\Python
-\end{lstlisting}
-\end{frame}
-
-
-\begin{frame}[fragile,label=sec-3-0-5]{CD - Change Directory}
+\begin{frame}[fragile,label=sec-3-0-2]{CD - Change Directory}
  \lstset{numbers=left,language=sh,label= ,caption= }
 \begin{lstlisting}
 pwd #your current path or %pwd 
@@ -240,7 +212,7 @@ rm -rf test_dir #-rf = recursive and force -- dangerous
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-3-0-6]{Open files in text editor}
+\begin{frame}[fragile,label=sec-3-0-3]{Open files in text editor}
  \begin{itemize}
 \item Mac
 \end{itemize}
@@ -266,12 +238,8 @@ less -SN filename.txt
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label=sec-3-0-7]{Find}
-\url{http://www.tecmint.com/35-practical-examples-of-linux-find-command/}
-\end{frame}
 
-
-\begin{frame}[fragile,label=sec-3-0-8]{Finding programs and scripts}
+\begin{frame}[fragile,label=sec-3-0-4]{Finding programs and scripts}
  \begin{itemize}
 \item Depends on operating system
 \end{itemize}
@@ -285,8 +253,129 @@ which python
 \end{frame}
 
 
+\begin{frame}[label=sec-3-0-5]{Sudo, Elevated Rights, Admin}
+\begin{itemize}
+\item Mac/Linux: sudo cmd file
+\item Windows: runas /user:admin
+\item Best to minimize programs running at elevated rights
+\item Modifying system files usually require this.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile,label=sec-3-0-6]{File Permissions}
+ \lstset{numbers=left,language=sh,label= ,caption= }
+\begin{lstlisting}
+ls -laG #show all files and permissions
+\end{lstlisting}
+
+D = directory \\
+4 = Read (r) \\
+2 = Write (w) \\
+1 = Execute(x) \\
+777 = All rights for User, Group, Everyone <= BAD
+
+\begin{itemize}
+\item What is rwx-rw-r-- in numerical permissions?
+
+\item Scripts will often need execution rights
+\end{itemize}
+\lstset{numbers=left,language=sh,label= ,caption= }
+\begin{lstlisting}
+chmod +x filename
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-3-0-7]{Simple Scripts}
+ \lstset{numbers=left,language=sh,label= ,caption= }
+\begin{lstlisting}
+echo "print 'hello world'" > test.py
+
+ls -laG #look at the file 
+
+python test.py 
+
+echo "#\!/usr/bin/python \n print 'hello world'" > test.py
+./test.py
+\end{lstlisting}
+
+\begin{itemize}
+\item How can we make the second way work?
+\end{itemize}
+
+\note{Notes:
+}
+\end{frame}
+
+
+
+\begin{frame}[label=sec-3-0-8]{Find}
+\url{http://www.tecmint.com/35-practical-examples-of-linux-find-command/}
+\end{frame}
+
+
+\begin{frame}[label=sec-3-0-9]{Shells vs Terminals}
+\begin{itemize}
+\item Shells are programs (like python) that help you interact computer.
+\begin{itemize}
+\item csh (c shell, mostly seen on older servers)
+\item bash (most common)
+\item zsh (most convenient)
+\end{itemize}
+\item Terminals are wrappers around shells (iterm2 for macs)
+\item .bashrc, .cshrc, .zshrc are configuration files for shells
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile,label=sec-3-0-10]{Paths}
+ \begin{itemize}
+\item One of the biggest causes of angst
+\item Exists at system and user levels
+\item Order matters; read first > read second
+\end{itemize}
+\lstset{numbers=left,language=sh,label= ,caption= }
+\begin{lstlisting}
+#in bash, zsh 
+
+#in windows (dos)
+path %path%;C:\Python #temp
+# see control panel > environment variables for permanent
+\end{lstlisting}
+\begin{itemize}
+\item Macs/linux
+\end{itemize}
+\lstset{numbers=left,language=sh,label= ,caption= }
+\begin{lstlisting}
+/etc/paths #admin levels for mac
+/etc/environment #admin
+~/.bashrc #user level for mac/linux
+export PATH="$PATH:/usr/local/bin/python"
+PATH=$PATH:/my/new/path #temporary
+\end{lstlisting}
+\end{frame}
+
+
 \section{Python}
 \label{sec-4}
+
+\begin{frame}[fragile,label=sec-4-0-1]{Anaconda and Spydyer}
+ \begin{itemize}
+\item Anaconda is a pre-packaged python distribution for scientists
+\item Spyder is an IDE (Integrated Development Environment)
+\item Open a terminal or click spyder
+\end{itemize}
+
+\lstset{numbers=left,language=sh,label= ,caption= }
+\begin{lstlisting}
+anaconda/bin/spyder
+\end{lstlisting}
+
+\begin{itemize}
+\item Open terminal within spyder
+\end{itemize}
+\end{frame}
+
 
 \subsection{Basics}
 \label{sec-4-1}
@@ -345,27 +434,9 @@ Are surround by triple-quoted strings
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-4]{Simple Scripts}
- \begin{itemize}
-\item Open a terminal.
-\end{itemize}
-\lstset{numbers=left,language=sh,label= ,caption= }
-\begin{lstlisting}
-echo "print 'hello world'" > test.py
-python test.py 
-
-#Or make it an executable script
-echo "#\!/usr/bin/python \n print 'hello world'" > test.py
-chmod +x test.py
-./test.py
-\end{lstlisting}
-
-\note{Notes:
-}
-\end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-5]{Basic Types}
+\begin{frame}[fragile,label=sec-4-1-4]{Basic Types}
  \begin{itemize}
 \item Numeric: int, float, long, complex
 \item Sequence: str, unicode, list, tuple, bytearray, buffer, xrange
@@ -389,7 +460,7 @@ type(var3)
 \end{frame}
 
 
-\begin{frame}[label=sec-4-1-6]{Data Structures}
+\begin{frame}[label=sec-4-1-5]{Data Structures}
 \begin{itemize}
 \item Often considered "types" or "compound types"
 \item Base python has
@@ -402,7 +473,7 @@ type(var3)
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-7]{Lists: Slicing}
+\begin{frame}[fragile,label=sec-4-1-6]{Lists: Slicing}
  \begin{itemize}
 \item lists are flexible. They can be nested, shrunk, combined \ldots{}
 \item Indexed starting with 0
@@ -430,7 +501,7 @@ ls[1:4:2] #last element in step. Easy way to get odd
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-8]{Lists: Adding and Removing Elements}
+\begin{frame}[fragile,label=sec-4-1-7]{Lists: Adding and Removing Elements}
  \lstset{numbers=left,language=Python,label= ,caption= }
 \begin{lstlisting}
 ls # pre
@@ -453,7 +524,7 @@ ls.count(1)
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-9]{Lists: Whole List Operations}
+\begin{frame}[fragile,label=sec-4-1-8]{Lists: Whole List Operations}
  \lstset{numbers=left,language=Python,label= ,caption= }
 \begin{lstlisting}
 # Concatenate two lists
@@ -472,7 +543,7 @@ ls
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-10]{Lists: List Comprehensions}
+\begin{frame}[fragile,label=sec-4-1-9]{Lists: List Comprehensions}
  \begin{itemize}
 \item Functions on list elements, like loops
 \item Not recommended for complex scenarios
@@ -494,7 +565,7 @@ ls2
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-11]{Sets}
+\begin{frame}[fragile,label=sec-4-1-10]{Sets}
  \begin{itemize}
 \item Set are like lists, but must contain unique data and can't be nested
 \item Allows operations such a union and intersections
@@ -521,7 +592,7 @@ set([1, 2, 3])
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-12]{Tuples}
+\begin{frame}[fragile,label=sec-4-1-11]{Tuples}
  \begin{itemize}
 \item Tuples are like lists, but they are immutable
 \item Memory efficient because python knows how much memory to allocate
@@ -547,7 +618,7 @@ tp2[2] #slicing uses [] not ()
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-13]{Dictionaries}
+\begin{frame}[fragile,label=sec-4-1-12]{Dictionaries}
  \begin{itemize}
 \item Represented by key:value pairs. Know as hashes, maps, associative collections
 \item Key can be numbers or strings, but must be unique.
@@ -573,15 +644,15 @@ dct.values()
 \end{frame}
 
 
-\begin{frame}[label=sec-4-1-14]{Operators}
+\begin{frame}[label=sec-4-1-13]{Operators}
 \end{frame}
 
 
-\begin{frame}[label=sec-4-1-15]{Control structures}
+\begin{frame}[label=sec-4-1-14]{Control structures}
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-16]{Strings}
+\begin{frame}[fragile,label=sec-4-1-15]{Strings}
  \begin{block}{Strings vs Numbers}
 \lstset{numbers=left,language=Python,label= ,caption= }
 \begin{lstlisting}
@@ -618,7 +689,7 @@ False
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-4-1-17]{Objects, Methods and Functions}
+\begin{frame}[fragile,label=sec-4-1-16]{Objects, Methods and Functions}
  \begin{itemize}
 \item Methods are function that operate on objects
 \item Object: dog Method: eat
@@ -641,13 +712,13 @@ len(var1) # also method, but functional looking
 \end{frame}
 
 
-\begin{frame}[label=sec-4-1-18]{Modules}
+\begin{frame}[label=sec-4-1-17]{Modules}
 \end{frame}
 
-\begin{frame}[label=sec-4-1-19]{Dates}
+\begin{frame}[label=sec-4-1-18]{Dates}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-4-1-20]{Functions}
+\begin{frame}[fragile,label=sec-4-1-19]{Functions}
  \begin{itemize}
 \item parameter order matters, unless name=paramater
 \item anonymous functions use lambda keyword
@@ -674,10 +745,10 @@ positional ordering matter is not named 4
 \end{frame}
 
 
-\begin{frame}[label=sec-4-1-21]{Files I/O}
+\begin{frame}[label=sec-4-1-20]{Files I/O}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-4-1-22]{CSV files - Basic}
+\begin{frame}[fragile,label=sec-4-1-21]{CSV files - Basic}
  \lstset{numbers=left,language=sh,label= ,caption= }
 \begin{lstlisting}
 echo -e "header1, header2\n1,2\n3,4" > test.csv
@@ -700,7 +771,7 @@ fl
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-4-1-23]{CSV files - Custom}
+\begin{frame}[fragile,label=sec-4-1-22]{CSV files - Custom}
  \lstset{numbers=left,language=Python,label= ,caption= }
 \begin{lstlisting}
 class customcsv(csv.Dialect):
@@ -713,7 +784,7 @@ fl.csv
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-4-1-24]{CSV files - Pandas - read$_{\text{csv}}$}
+\begin{frame}[fragile,label=sec-4-1-23]{CSV files - Pandas - read$_{\text{csv}}$}
  \lstset{numbers=left,language=Python,label= ,caption= }
 \begin{lstlisting}
 import pandas as pd
@@ -735,7 +806,7 @@ fldf
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label=sec-4-1-25]{CSV files - Pandas - More Options}
+\begin{frame}[label=sec-4-1-24]{CSV files - Pandas - More Options}
 \begin{itemize}
 \item nrow=5 => read 5 rows
 \item na\(\textunderscore\)rep='NULL' => set null to NULL else empty
@@ -746,7 +817,7 @@ fldf
 \url{http://pandas.pydata.org/pandas-docs/version/0.13.1/generated/pandas.io.parsers.read_csv.html}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-4-1-26]{CSV files - Pandas - to\(\_\)csv}
+\begin{frame}[fragile,label=sec-4-1-25]{CSV files - Pandas - to\(\_\)csv}
  \begin{itemize}
 \item Many of the same options as read$_{\text{csv}}$
 \end{itemize}
@@ -771,7 +842,7 @@ head1  head2
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-1-27]{Getting Help}
+\begin{frame}[fragile,label=sec-4-1-26]{Getting Help}
  \begin{itemize}
 \item help(function) gets you the "docstring"
 \end{itemize}

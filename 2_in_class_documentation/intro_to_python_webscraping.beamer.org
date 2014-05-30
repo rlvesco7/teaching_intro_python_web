@@ -23,43 +23,57 @@
 
 *** Class Objectives
 
-- Programming is hard
+- Programming is (can be) hard
 http://techcrunch.com/2014/05/24/dont-believe-anyone-who-tells-you-learning-to-code-is-easy/
 
 - Introduce basic python and webscraping
 - Provide skills & knowledge not in online tutorials
 - Tools that can be used with any programming language
-
+- Provide some guidance for your personal projects
 
 *** Plan
-- 9 - 9:15: Setup issues
-- 9:15 - 9:30 Python in Scientific Computing
-- 9:30 - 9:45 Anaconda & Spyder
-- 9:45 - 10:30 Command line basics
-- 10:30 - 12:00 Python Basics
-- 12:00 - 12:30 Lunch
-- 12:30 - 3:00 Python Webscraping
-- 3:00 - 4:30 Practice with your own site
-- 4:30 - 5:00 Other Tools, Development Environment
-
+- Content
+  - Why Python?
+  - Working From the Command Line
+  - Python
+  - Webscraping
+  - Discuss sites YOU want to scrape
+  - Development environments
+- Breaks 
+  - 10:30 (10 min)
+  - 12:00 Lunch (30 min)
+  - 1:30 (10 min)
 
 * Python Context
 
-*** Abbreviated/Opinionated History of Programming Languages
+*** Opinionated  History of Programming Languages
 
+- Lisp
 - C, C++ 
 - Awk, Sed & shell scripts
 - Practical Extraction and Reporting (perl)
 - S (R precursor)
 - Java 
-- Ruby (perl 2.0)
+- Ruby
 - R 
+- Haskell
+- Clojure (Incanter)
 - Python
-- Julia (R 2.0)
+- Julia 
 
 *** Python and Stats
 
-*** Python and Jobs
+[[file:./images/lang_and_regression.png]]
+
+*** Python and Journals
+
+[[file:./images/lang_in_journals.png]]
+
+*** Homogenization of Programming
+
+http://www.talyarkoni.org/blog/2013/11/18/the-homogenization-of-scientific-computing-or-why-python-is-steadily-eating-other-languages-lunch/ 
+
+- TLDR: One tool for many problems
 
 *** Python Considerations
 **** Support For						      :BMCOL:
@@ -85,13 +99,19 @@ http://techcrunch.com/2014/05/24/dont-believe-anyone-who-tells-you-learning-to-c
 
 *** The many faces and versions of Python
 
-- Cython (main)
+- Cython (python to c to python)
 - IronPython (.net)
 - PyPy (JIT)
-- Jython (compiles to java)
+- Jython (Java)
 - Ipython (scientific and interactive)
 
 *** Version 2 vs 3
+
+Python 3 is killing Python
+https://medium.com/@deliciousrobots/5d2ad703365d/ 
+
+Python 3 can revive Python
+https://medium.com/p/2a7af4788b10
 
 *** Interactive Python (IPYTHON)
 
@@ -104,51 +124,13 @@ http://techcrunch.com/2014/05/24/dont-believe-anyone-who-tells-you-learning-to-c
   - %who shows all variables
   - !cmd lets you run terminal commands
 - Terminal friendly
-
-
 * Terminals
-
-*** Anaconda and Spydyer
-
-- Anaconda is a pre-packaged python distribution for scientists
-- Spyder is an IDE (Integrated Development Environment)
-- Open a terminal or click spyder 
-
-#+BEGIN_SRC sh
-anaconda/bin/spyder
-#+END_SRC
-
-- Open terminal within spyder
-
 
 *** Why Terminals and Command Line Programs?
 
 - Troubleshooting python programs
-- Managing programs and files
+- Managing programs and files (very important for webscraping)
 - Right tool for some jobs
-
-
-*** Shells vs Terminals
-
-- Shells are programs (like python) that help you interact computer.
-  - csh (c shell, mostly seen on older servers)
-  - bash (most common)
-  - zsh (most convenient)
-- Terminals are wrappers around shells (iterm2 for macs)
-- .bashrc, .cshrc, .zshrc are configuration files for shells
-
-
-*** Paths
-- One of the biggest causes of angst
-- Exists at system and user levels
-- Order matters; best set in configuration
-#+BEGIN_SRC sh
-#in bash, zsh 
-export PATH="$PATH:/usr/local/bin/python" and press Enter.
-#in windows (dos)
-path %path%;C:\Python
-#+END_SRC
-
 
 *** CD - Change Directory 
 
@@ -193,22 +175,127 @@ notepad filename.txt
 less -SN filename.txt
 #+END_SRC
 
-*** Find
 
-http://www.tecmint.com/35-practical-examples-of-linux-find-command/
+*** Sudo, Elevated Rights, Admin
+
+- Mac/Linux: sudo cmd file
+- Windows: runas /user:admin
+- Best to minimize programs running at elevated rights
+- Modifying system files usually require this. 
+
+
+*** File Permissions
+
+#+BEGIN_SRC sh
+ls -laG #show all files and permissions
+#+END_SRC
+
+D = directory \\
+4 = Read (r) \\
+2 = Write (w) \\
+1 = Execute(x) \\
+777 = All rights for User, Group, Everyone <= BAD
+
+- What is rwx-rw-r-- in numerical permissions?
+
+- Scripts will often need execution rights
+#+BEGIN_SRC sh
+chmod +x filename
+#+END_SRC
 
 
 *** Finding programs and scripts
 - Depends on operating system
 
 #+BEGIN_SRC sh
-where python
-whereis python
-which python
+where programname
+which programname #will give unix style path on windows
+whereis programname #not on all programs
+#+END_SRC
+
+
+
+*** Simple Scripts
+- Scripts should begin with #!PathToYourExecutable
+#+BEGIN_SRC sh
+#non-standard script
+echo "print 'hello world'" > test.py
+cat test.py # shows contents
+ls -laG #look at the file 
+
+python test.py 
+
+echo -e "#\!PATHTOYOURPYTHON \n print 'hello world'" > test.py
+less test.py #spits it out to terminal to viewer
+./test.py
+#+END_SRC
+- How can we make the second way work?
+
+#+BEGIN_SRC sh
+which env 
+!#/path/to/env python #absolute path not needed
+#+END_SRC
+
+**** Notes: 
+     :PROPERTIES:
+     :BEAMER_env: note
+     :END:
+
+
+
+*** Wget 
+- Flexible, fast tool for downloading & spidering
+
+*** Find
+
+http://www.tecmint.com/35-practical-examples-of-linux-find-command/
+
+
+*** Shells vs Terminals
+
+- Shells are programs (like python) that help you interact computer.
+  - csh (c shell, mostly seen on older servers)
+  - bash (most common)
+  - zsh (most convenient)
+- Terminals are wrappers around shells (iterm2 for macs)
+- .bashrc, .cshrc, .zshrc are configuration files for shells
+
+
+*** Paths
+- One of the biggest causes of angst
+- Exists at system and user levels
+- Order matters; read first > read second
+#+BEGIN_SRC sh
+#in bash, zsh 
+
+#in windows (dos)
+path %path%;C:\Python #temp
+# see control panel > environment variables for permanent
+#+END_SRC
+- Macs/linux
+#+BEGIN_SRC sh
+/etc/paths #admin levels for mac
+/etc/environment #admin
+~/.bashrc #user level for mac/linux
+export PATH="$PATH:/usr/local/bin/python"
+PATH=$PATH:/my/new/path #temporary
 #+END_SRC
 
 
 * Python
+
+*** Anaconda and Spydyer
+
+- Anaconda is a pre-packaged python distribution for scientists
+- Spyder is an IDE (Integrated Development Environment)
+- Open a terminal or click spyder 
+
+#+BEGIN_SRC sh
+anaconda/bin/spyder
+#+END_SRC
+
+- Open terminal within spyder
+
 
 ** Basics
 
@@ -271,22 +358,6 @@ Are surround by triple-quoted strings
 - stuff and stuff2
 
 
-*** Simple Scripts
-- Open a terminal. 
-#+BEGIN_SRC sh
-echo "print 'hello world'" > test.py
-python test.py 
-
-#Or make it an executable script
-echo "#\!/usr/bin/python \n print 'hello world'" > test.py
-chmod +x test.py
-./test.py
-#+END_SRC
-
-**** Notes: 
-     :PROPERTIES:
-     :BEAMER_env: note
-     :END:
 
 
 *** Basic Types
