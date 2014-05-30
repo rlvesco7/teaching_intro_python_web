@@ -1,4 +1,4 @@
-% Created 2014-05-29 Thu 19:58
+% Created 2014-05-29 Thu 21:41
 \documentclass[presentation]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -250,11 +250,26 @@ open -t filename.ext #default editor for extension
 open -a TextEdit filename.ext #forces textedit
 #alias textedit='open -a TextEdit' For .bashrc
 \end{lstlisting}
+\begin{itemize}
+\item Windows
+\end{itemize}
+\lstset{numbers=left,language=sh,label= ,caption= }
+\begin{lstlisting}
+notepad filename.txt
+\end{lstlisting}
+\begin{itemize}
+\item Terminal Viewer (useful for super large files)
+\end{itemize}
+\lstset{numbers=left,language=sh,label= ,caption= }
+\begin{lstlisting}
+less -SN filename.txt
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}[label=sec-3-0-7]{Find}
 \url{http://www.tecmint.com/35-practical-examples-of-linux-find-command/}
 \end{frame}
+
 
 \begin{frame}[fragile,label=sec-3-0-8]{Finding programs and scripts}
  \begin{itemize}
@@ -270,22 +285,6 @@ which python
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-3-0-9]{wget example}
- \lstset{numbers=left,language=sh,label= ,caption= }
-\begin{lstlisting}
-wget -r -H -l1 -erobots=off -nd -A 'pa02*.zip' http://www.google.com/googlebooks/uspto-patents-applications-text.html
-
-# -r = recursive
-# -H = to span domains, ie can leave blog ??? 
-# -l1 = only to the depth of one 
-# -erobots=off = ignore robots.txt
-# -nd = don't follow directory structure, just drop all files into folder
-# -A 'pa01*.zip" = download only links with this regex
-
-xargs -i wget 'http://storage.googleapis.com/patents/grant_full_text/2012/{}' < list2012missing.txt
-\end{lstlisting}
-\textattachfile[color=0 0 0.5]{pdfwget.txt}{view source}
-\end{frame}
 \section{Python}
 \label{sec-4}
 
@@ -310,8 +309,6 @@ xargs -i wget 'http://storage.googleapis.com/patents/grant_full_text/2012/{}' < 
 \begin{lstlisting}
 print "hello world"
 \end{lstlisting}
-
-hello world
 \end{block}
 
 \begin{block}{Version 3 - Print Function}
@@ -319,7 +316,6 @@ hello world
 \begin{lstlisting}
 print("hello world")
 \end{lstlisting}
-
 hello world
 \end{block}
 
@@ -742,7 +738,7 @@ fldf
 \begin{frame}[label=sec-4-1-25]{CSV files - Pandas - More Options}
 \begin{itemize}
 \item nrow=5 => read 5 rows
-\item na$_{\text{rep}}$='NULL' => set null to NULL else empty
+\item na\(\textunderscore\)rep='NULL' => set null to NULL else empty
 \item index=FALSE => no indices in output
 \item cols=['header1','header2'] => specify columns
 \item For all options:
@@ -750,12 +746,11 @@ fldf
 \url{http://pandas.pydata.org/pandas-docs/version/0.13.1/generated/pandas.io.parsers.read_csv.html}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-4-1-26]{CSV files - Pandas - to$_{\text{csv}}$}
+\begin{frame}[fragile,label=sec-4-1-26]{CSV files - Pandas - to\(\_\)csv}
  \begin{itemize}
 \item Many of the same options as read$_{\text{csv}}$
 \end{itemize}
 \url{http://pandas.pydata.org/pandas-docs/version/0.13.1/generated/pandas.DataFrame.to_csv.html}
-
 \lstset{numbers=left,language=Python,label= ,caption= }
 \begin{lstlisting}
 import os #to see directory contents
@@ -850,6 +845,7 @@ directly.
 
 \subsection{XML}
 \label{sec-5-2}
+
 \begin{frame}[fragile,label=sec-5-2-1]{XPATH SQL for HTML/XML}
  \begin{itemize}
 \item Xpath is a language that allows you to select "nodes" from xml
@@ -863,6 +859,40 @@ http://www.zvon.org/comp/r/tut-XPath_1.html#Pages~List_of_XPaths
 \item Full reference
 \end{itemize}
 \url{http://www.w3.org/TR/xpath/} 
+\end{frame}
+
+
+
+
+\begin{frame}[fragile,shrink=1,label=sec-5-2-2]{XML - Loading}
+
+ \lstset{numbers=left,language=Python,label= ,caption= }
+\begin{lstlisting}
+xml = """
+    <root>
+        <name type="superhero">Batman</name>
+            <sidekick>Batty</sidekick>
+        <contact type="email">riseup@batman.com</contact>
+        <contact type="phone">555-1212</contact>
+    </root>
+            """
+
+from lxml import objectify
+root = objectify.fromstring(xml) #use parse from file
+
+print root.tag
+print root.text
+print root.attrib
+
+print root.name.tag
+print root.name.text
+print root.name.attrib
+
+for con in root.contact:
+    print con.text
+    print con.attrib
+\end{lstlisting}
+\textattachfile[color =  0.5 0.5 0.5]{pdfxml.txt}{view source}
 \end{frame}
 
 
@@ -912,8 +942,25 @@ enemies
 \end{frame}
 
 
-\begin{frame}[fragile,shrink=1,label=sec-5-3-3]{JSON - Example}
+\begin{frame}[fragile,label=sec-5-3-3]{JSON - Converting to DataFrames}
+ \lstset{numbers=left,language=Python,label= ,caption= }
+\begin{lstlisting}
+enemies = pd.DataFrame(rslt['enemies'], columns=['name'])
+enemies
+\end{lstlisting}
 
+\lstset{numbers=left,language=Python,label= ,caption= }
+\begin{lstlisting}
+	      name
+0             The Joker
+1  The People of Gotham
+
+[2 rows x 1 columns]
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile,shrink=20,label=sec-5-3-4]{JSON - Example}
 
  \lstset{numbers=left,language=Python,label= ,caption= }
 \begin{lstlisting}
@@ -941,14 +988,11 @@ for rs in rstadd:
 import pandas as pd
 pd.DataFrame(rstadd)
 \end{lstlisting}
-\textattachfile[color=0 0 0.5]{pdfjson.txt}{view source}
+\textattachfile[color =  0.5 0.5 0.5]{pdfjson.txt}{view source}
 \end{frame}
 
 
-\subsection{Regular Expression}
-\label{sec-5-4}
-
-\begin{frame}[label=sec-5-4-1]{Regular Expressions (Regex)}
+\begin{frame}[label=sec-5-3-5]{Regular Expressions (Regex)}
 \begin{itemize}
 \item Regex came from perl, used to find text patterns
 \item To fragile for webscraping, but important complement
@@ -1102,14 +1146,6 @@ b = ('x', 10)
 c = ('q', -42)
 return (a, b, c)
 \end{lstlisting}
-
-\begin{center}
-\begin{tabular}{lr}
-b & 200\\
-x & 10\\
-q & -42\\
-\end{tabular}
-\end{center}
 \end{frame}
 
 \begin{frame}[fragile,label=sec-9-0-6]{Python Output}

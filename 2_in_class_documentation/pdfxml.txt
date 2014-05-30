@@ -1,0 +1,24 @@
+
+xml = """
+    <root>
+        <name type="superhero">Batman</name>
+            <sidekick>Batty</sidekick>
+        <contact type="email">riseup@batman.com</contact>
+        <contact type="phone">555-1212</contact>
+    </root>
+            """
+
+from lxml import objectify
+root = objectify.fromstring(xml) #use parse from file
+
+print root.tag
+print root.text
+print root.attrib
+
+print root.name.tag
+print root.name.text
+print root.name.attrib
+
+for con in root.contact:
+    print con.text
+    print con.attrib

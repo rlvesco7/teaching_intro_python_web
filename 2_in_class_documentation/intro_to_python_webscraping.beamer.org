@@ -694,6 +694,9 @@ len(...)
 - Firebug is tool that allow you to inspect the elements of a webpage
 directly. 
 
+
+** XML
+
 *** XPATH SQL for HTML/XML
 - Xpath is a language that allows you to select "nodes" from xml
 - Note: xpath 2.0 not implemented in all cases though many examples online
@@ -702,6 +705,43 @@ directly.
 - Full reference
 http://www.w3.org/TR/xpath/ 
 
+
+
+
+*** XML - Loading
+:PROPERTIES:
+:BEAMER_opt: shrink=1
+:END:
+
+#+BEGIN_SRC python :results output code :session :exports result :tangle pdfxml.txt
+xml = """
+    <root>
+        <name type="superhero">Batman</name>
+            <sidekick>Batty</sidekick>
+        <contact type="email">riseup@batman.com</contact>
+        <contact type="phone">555-1212</contact>
+    </root>
+            """
+
+from lxml import objectify
+root = objectify.fromstring(xml) #use parse from file
+
+print root.tag
+print root.text
+print root.attrib
+
+print root.name.tag
+print root.name.text
+print root.name.attrib
+
+for con in root.contact:
+    print con.text
+    print con.attrib
+#+END_SRC 
+\textattachfile[color =  0.5 0.5 0.5]{pdfxml.txt}{view source}
+
+
+** JSON
 
 *** JSON - Loading
  
@@ -725,6 +765,7 @@ jsn_again = json.dumps(rslt) #back to json
  #+BEGIN_SRC python
 {u'buddy': u'robin', u'enemies': [{u'name': u'The Joker'}, {u'name': u'The People of Gotham'}], u'name': u'batman', u'hobbies': [u'fast cars', u'fast planes', u'spending money']}
  #+END_SRC
+
 
 *** JSON - Converting to DataFrames
 
@@ -759,7 +800,11 @@ enemies
 [2 rows x 1 columns]
 #+END_SRC
 
+
 *** JSON - Example
+:PROPERTIES:
+:BEAMER_opt: shrink=20
+:END:
 
 #+BEGIN_SRC python :results output code :session :exports result
 import json
@@ -786,10 +831,13 @@ for rs in rstadd:
 import pandas as pd
 pd.DataFrame(rstadd)
 #+END_SRC 
+\textattachfile[color =  0.5 0.5 0.5]{pdfjson.txt}{view source}
+
 
 *** Regular Expressions (Regex)
 - Regex came from perl, used to find text patterns
 - To fragile for webscraping, but important complement
+
 
 * Development
 
